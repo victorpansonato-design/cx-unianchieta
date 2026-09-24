@@ -4,7 +4,8 @@
  * inteiro — basta abrir. O encerrado mais recentemente fica em cima.
  *
  * Uma linha por processo, com o que importa depois do fim: quando terminou e
- * quanto tempo levou. Para reabrir, mova o processo para outra etapa.
+ * quanto tempo levou. O processo abre aqui dentro (#/concluidos/CX-003), e
+ * de lá dá para reabri-lo numa etapa anterior quando surgirem melhorias.
  */
 import { useMemo } from 'react';
 import { FolderCheck, SearchX } from 'lucide-react';
@@ -116,7 +117,7 @@ export function ConcluidosPage({ query }: { query: URLSearchParams }) {
               const setor = nomeDe(s.config.setores, p.setorId);
               return (
                 <li key={p.id}>
-                  <Row href={rotas.processo(p.codigo)} className="group">
+                  <Row href={rotas.concluido(p.codigo)} className="group">
                     <div className={`flex flex-col gap-2 px-5 py-3 ${GRADE}`}>
                       <div className="min-w-0">
                         <span className="font-mono text-[11px] text-ink-4">{p.codigo}</span>

@@ -2,12 +2,16 @@
  * Mover um processo de etapa com o aviso combinado: ao AVANÇAR deixando
  * tarefas abertas na etapa atual, pergunta se quer seguir mesmo assim.
  * Usado pelo botão "Avançar", pela barra de etapas, pelo quadro e pelo menu.
+ *
+ * Tirar um concluído da última etapa é reabrir: abre o "Reabrir processo",
+ * que pede o motivo, em vez de mover direto.
  */
 import { createElement } from 'react';
+import { abrirReabrirProcesso } from '../../app/reabrirProcesso';
 import { useConfirm } from '../../components/ui/Overlay';
 import { useToast } from '../../components/ui/Toast';
 import { store, type Processo } from '../../data';
-import { etapaDe, indiceEtapa } from '../../domain/processos';
+import { ehEtapaFinal, etapaDe, indiceEtapa } from '../../domain/processos';
 import { tarefasAbertasDaEtapa } from '../../domain/tarefas';
 import { plural } from '../../lib/text';
 import { acoesProcesso } from '../../services/acoes';
@@ -23,6 +27,11 @@ export function useMoverEtapa() {
     const etapaAtual = etapaDe(s.config, processo.etapaId);
     const etapaDestino = etapaDe(s.config, etapaId);
     if (!etapaDestino || etapaId === processo.etapaId) return false;
+
+    if (processo.situacao === 'concluido' && !ehEtapaFinal(s.config, etapaId)) {
+      abrirReabrirProcesso(processo.id, etapaId);
+      return false;
+    }
 
     if (destino > atual && etapaAtual) {
       const abertas = tarefasAbertasDaEtapa(s, processo.id, processo.etapaId);

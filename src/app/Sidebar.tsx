@@ -65,9 +65,10 @@ function secaoAtiva(rota: Rota): Secao | null {
       return 'notas';
     case 'concluidos':
       return 'concluidos';
+    case 'processo':
+      return rota.concluido ? 'concluidos' : 'processos';
     case 'processos':
     case 'relatorio':
-    case 'processo':
     case 'comparacao':
     case 'resumo':
       return 'processos';

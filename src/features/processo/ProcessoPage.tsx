@@ -3,10 +3,16 @@
  * a ação principal ("Avançar para a próxima etapa"), a barra de etapas com as
  * datas, o conteúdo em abas à esquerda e o painel de campos à direita.
  * Tudo edita no lugar e salva sozinho.
+ *
+ * O concluído abre dentro de Concluídos (#/concluidos/CX-003), com a mesma
+ * tela e o botão "Reabrir processo". Um link antigo para #/processos/ é
+ * corrigido ao abrir, e a reabertura traz o processo de volta para Processos.
  */
+import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowLeft, ArrowRight, MoreHorizontal, Presentation, Printer, Trash2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MoreHorizontal, Presentation, Printer, RotateCcw, Trash2 } from 'lucide-react';
 import { NaoEncontrada } from '../../app/NaoEncontrada';
+import { abrirReabrirProcesso } from '../../app/reabrirProcesso';
 import { navegar, rotas, type AbaProcesso } from '../../app/router';
 import { EtapaStepper } from '../../components/domain/EtapaStepper';
 import { DiasNaEtapa, PrazoStatus, SituacaoStatus } from '../../components/domain/StatusProcesso';
@@ -27,14 +33,22 @@ import { AntesDepoisAba } from './abas/AntesDepoisAba';
 import { TarefasAba } from './abas/TarefasAba';
 import { VisaoGeralAba } from './abas/VisaoGeralAba';
 import { PainelDeCampos } from './PainelDeCampos';
+import { formatarData } from '../../lib/dates';
 import { useMoverEtapa } from './useMoverEtapa';
 
-export function ProcessoPage({ codigo, aba }: { codigo: string; aba: AbaProcesso }) {
+export function ProcessoPage({ codigo, aba, concluido }: { codigo: string; aba: AbaProcesso; concluido: boolean }) {
   const s = useSnapshot();
   const p = processoPorCodigo(s, codigo);
   const mover = useMoverEtapa();
   const confirmar = useConfirm();
   const toast = useToast();
+  const ehConcluido = p?.situacao === 'concluido';
+  const rotaDaAba = (a: AbaProcesso) => (ehConcluido ? rotas.concluido(codigo, a) : rotas.processo(codigo, a));
+
+  // O endereço segue a situação: concluído em Concluídos, o resto em Processos.
+  useEffect(() => {
+    if (p && ehConcluido !== concluido) navegar(rotaDaAba(aba), { substituir: true });
+  }, [p, ehConcluido, concluido, aba]);
 
   if (!p) {
     return (
@@ -61,7 +75,7 @@ export function ProcessoPage({ codigo, aba }: { codigo: string; aba: AbaProcesso
     });
     if (!ok) return;
     await acoesProcesso.remover(p.id);
-    navegar(rotas.processos());
+    navegar(ehConcluido ? rotas.concluidos() : rotas.processos());
     toast({ title: `${p.codigo} excluído.` });
   };
 
@@ -84,12 +98,12 @@ export function ProcessoPage({ codigo, aba }: { codigo: string; aba: AbaProcesso
     <div className="space-y-5">
       {/* O concluído mora em Concluídos: voltar leva para lá. */}
       <motion.a
-        href={p.situacao === 'concluido' ? rotas.concluidos() : rotas.processos()}
+        href={ehConcluido ? rotas.concluidos() : rotas.processos()}
         whileTap={press}
         className="inline-flex items-center gap-1.5 text-[12px] font-medium text-ink-3 transition-colors hover:text-ink"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
-        {p.situacao === 'concluido' ? 'Concluídos' : 'Processos'}
+        {ehConcluido ? 'Concluídos' : 'Processos'}
       </motion.a>
 
       <header className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -122,7 +136,21 @@ export function ProcessoPage({ codigo, aba }: { codigo: string; aba: AbaProcesso
               <span className="truncate">Avançar para {proxima.nome}</span>
             </Button>
           ) : (
-            p.situacao === 'concluido' && <Status tone="quiet">Processo concluído</Status>
+            ehConcluido && (
+              <>
+                <Status tone="quiet">
+                  {p.conclusao ? `Concluído em ${formatarData(p.conclusao)}` : 'Processo concluído'}
+                </Status>
+                <Button
+                  variant="secondary"
+                  icon={<RotateCcw className="h-4 w-4" />}
+                  onClick={() => abrirReabrirProcesso(p.id)}
+                  title="Voltar o processo para uma etapa anterior, com tudo o que ele já tem"
+                >
+                  Reabrir processo
+                </Button>
+              </>
+            )
           )}
           <Menu
             label="Mais ações do processo"
@@ -174,7 +202,7 @@ export function ProcessoPage({ codigo, aba }: { codigo: string; aba: AbaProcesso
             layoutId={`processo-abas-${p.id}`}
             label="Seções do processo"
             value={aba}
-            onChange={(a) => navegar(rotas.processo(p.codigo, a), { substituir: true })}
+            onChange={(a) => navegar(rotaDaAba(a), { substituir: true })}
             items={[
               { id: 'visao-geral', label: 'Visão geral' },
               { id: 'antes-e-depois', label: 'Antes e depois' },

@@ -80,7 +80,7 @@ export function PainelDeCampos({ processo: p, s }: { processo: Processo; s: Snap
             cabecalho={
               final ? (
                 <p className="max-w-[240px] text-[11.5px] leading-relaxed text-ink-4">
-                  O processo está na última etapa. Para reabri-lo, mova-o para outra etapa.
+                  O processo está na última etapa. Para ajustar alguma coisa, use “Reabrir processo”.
                 </p>
               ) : undefined
             }

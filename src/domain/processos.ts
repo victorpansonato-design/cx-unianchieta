@@ -235,6 +235,45 @@ export function moverParaEtapa(s: Snapshot, processoId: ID, etapaId: ID, autor: 
   return ops;
 }
 
+/* -- Reabrir --------------------------------------------------------------- */
+
+/**
+ * A etapa sugerida ao reabrir: a última em que o processo esteve antes de
+ * concluir. Sem histórico, a penúltima do fluxo.
+ */
+export function etapaAntesDaConclusao(config: Config, p: Processo): ID {
+  const final = config.etapas[config.etapas.length - 1];
+  const validas = new Set(config.etapas.slice(0, -1).map((e) => e.id));
+  const anterior = [...p.historicoEtapas].reverse().find((h) => h.etapaId !== final.id && validas.has(h.etapaId));
+  return anterior?.etapaId ?? config.etapas[Math.max(0, config.etapas.length - 2)].id;
+}
+
+/**
+ * Reabre um processo concluído numa etapa anterior, para ajustes. Tudo o que
+ * ele já tem continua — textos, fluxo, indicadores, tarefas, anexos — e o
+ * andamento guarda o motivo. A conclusão anterior fica na linha do tempo.
+ */
+export function reabrirProcesso(
+  s: Snapshot,
+  processoId: ID,
+  dados: { etapaId: ID; motivo: string; prazo: string | null },
+  autor: Autor,
+): Op[] {
+  const p = s.processos.find((x) => x.id === processoId);
+  const destino = etapaDe(s.config, dados.etapaId);
+  if (!p || !destino || p.situacao !== 'concluido' || ehEtapaFinal(s.config, dados.etapaId)) return [];
+
+  const motivo = dados.motivo.trim();
+  return moverParaEtapa(s, processoId, dados.etapaId, autor).map((op): Op => {
+    if (op.tipo === 'processo' && dados.prazo) return { ...op, valor: { ...op.valor, prazo: dados.prazo } };
+    if (op.tipo === 'andamento' && op.valor.tipo === 'situacao') {
+      const texto = `Processo reaberto para ajustes, de volta a “${destino.nome}”.${motivo ? ` Motivo: ${motivo}` : ''}`;
+      return { ...op, valor: { ...op.valor, texto } };
+    }
+    return op;
+  });
+}
+
 /* -- Situação -------------------------------------------------------------- */
 
 /**

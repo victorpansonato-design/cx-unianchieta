@@ -140,6 +140,10 @@ export const acoesProcesso = {
     return aplicar(regrasProcesso.definirSituacao(snapshot(), id, situacao, autor()));
   },
 
+  reabrir(id: ID, dados: { etapaId: ID; motivo: string; prazo: string | null }) {
+    return aplicar(regrasProcesso.reabrirProcesso(snapshot(), id, dados, autor()));
+  },
+
   async remover(id: ID) {
     const { ops, anexoIds } = regrasProcesso.removerProcesso(snapshot(), id);
     await aplicar(ops);

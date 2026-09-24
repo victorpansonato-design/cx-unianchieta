@@ -5,6 +5,7 @@
  * navegador, neste computador. Outra pessoa não vê o que está aqui.
  */
 import { FILES_DB_NAME, STORAGE_KEYS } from '../../../config/app';
+import { carregarBaseDaApresentacao } from '../../apresentacao';
 import type { CxRepository } from '../../repository';
 import { normalizarSnapshot, snapshotInicial } from '../../schema';
 import type { ID, Snapshot } from '../../types';
@@ -33,6 +34,18 @@ export function criarRepositorioLocal(): CxRepository {
     for (const c of COLECOES) db.escrever(c, s[c]);
   }
 
+  /** Sem rede ou sem o arquivo, o anexo só não abre; o resto da base entra igual. */
+  async function gravarArquivosDaApresentacao(lista: Record<string, string>) {
+    for (const [id, caminho] of Object.entries(lista)) {
+      try {
+        const resposta = await fetch(`${import.meta.env.BASE_URL}${caminho}`);
+        if (resposta.ok) await arquivos.salvar(id, await resposta.blob());
+      } catch {
+        // segue sem o arquivo
+      }
+    }
+  }
+
   function upsert<C extends ColecaoLista>(colecao: C, valor: Snapshot[C][number]) {
     const lista = atual[colecao] as Array<{ id: ID }>;
     const i = lista.findIndex((x) => x.id === valor.id);
@@ -53,9 +66,11 @@ export function criarRepositorioLocal(): CxRepository {
       if (lido) {
         atual = lido;
       } else {
-        // Primeira abertura neste navegador: grava a configuração inicial.
-        atual = snapshotInicial();
+        // Primeira abertura neste navegador: grava a base da apresentação à diretoria.
+        const base = await carregarBaseDaApresentacao();
+        atual = base.snapshot;
         gravarTudo(atual);
+        await gravarArquivosDaApresentacao(base.arquivos);
       }
       return atual;
     },

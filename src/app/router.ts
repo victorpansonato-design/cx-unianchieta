@@ -26,7 +26,8 @@ export type Rota =
   | { nome: 'relatorio' }
   | { nome: 'processos'; query: URLSearchParams }
   | { nome: 'concluidos'; query: URLSearchParams }
-  | { nome: 'processo'; codigo: string; aba: AbaProcesso }
+  /** `concluido`: aberto de dentro de Concluídos (#/concluidos/CX-003). */
+  | { nome: 'processo'; codigo: string; aba: AbaProcesso; concluido: boolean }
   | { nome: 'comparacao'; codigo: string }
   | { nome: 'resumo'; codigo: string }
   | { nome: 'configuracoes'; secao: SecaoConfig }
@@ -60,7 +61,12 @@ export function lerRota(hash: string): Rota {
   if (partes[0] === 'demandas') return { nome: 'demandas', demandaId: partes[1] ?? null };
   if (partes[0] === 'notas') return { nome: 'notas', notaId: partes[1] ?? null };
   if (partes[0] === 'relatorio') return { nome: 'relatorio' };
-  if (partes[0] === 'concluidos') return { nome: 'concluidos', query: new URLSearchParams(busca) };
+  if (partes[0] === 'concluidos') {
+    if (partes.length === 1) return { nome: 'concluidos', query: new URLSearchParams(busca) };
+    const aba = (partes[2] ?? 'visao-geral') as AbaProcesso;
+    if (ABAS_PROCESSO.includes(aba)) return { nome: 'processo', codigo: partes[1], aba, concluido: true };
+    return { nome: 'nao-encontrada' };
+  }
 
   if (partes[0] === 'processos') {
     if (partes.length === 1) return { nome: 'processos', query: new URLSearchParams(busca) };
@@ -68,7 +74,7 @@ export function lerRota(hash: string): Rota {
     if (partes[2] === 'comparacao') return { nome: 'comparacao', codigo };
     if (partes[2] === 'resumo') return { nome: 'resumo', codigo };
     const aba = (partes[2] ?? 'visao-geral') as AbaProcesso;
-    if (ABAS_PROCESSO.includes(aba)) return { nome: 'processo', codigo, aba };
+    if (ABAS_PROCESSO.includes(aba)) return { nome: 'processo', codigo, aba, concluido: false };
     return { nome: 'nao-encontrada' };
   }
 
@@ -100,6 +106,11 @@ export const rotas = {
     aba === 'visao-geral'
       ? `#/processos/${encodeURIComponent(codigo)}`
       : `#/processos/${encodeURIComponent(codigo)}/${aba}`,
+  /** O concluído mora em Concluídos. Um link para `processo` de um concluído é corrigido para cá ao abrir. */
+  concluido: (codigo: string, aba: AbaProcesso = 'visao-geral') =>
+    aba === 'visao-geral'
+      ? `#/concluidos/${encodeURIComponent(codigo)}`
+      : `#/concluidos/${encodeURIComponent(codigo)}/${aba}`,
   comparacao: (codigo: string) => `#/processos/${encodeURIComponent(codigo)}/comparacao`,
   resumo: (codigo: string) => `#/processos/${encodeURIComponent(codigo)}/resumo`,
   configuracoes: (secao: SecaoConfig = 'etapas') =>

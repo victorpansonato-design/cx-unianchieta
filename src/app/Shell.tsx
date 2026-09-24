@@ -7,6 +7,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Drawer } from '../components/ui/Overlay';
 import { pageVariants } from '../lib/motion';
+import { ReabrirProcessoModal } from '../features/processo/ReabrirProcessoModal';
 import { NovoProcessoModal } from '../features/processos/NovoProcessoModal';
 import { CommandPalette } from './CommandPalette';
 import { Header } from './Header';
@@ -73,6 +74,7 @@ export function Shell({ rota, children }: { rota: Rota; children: ReactNode }) {
       </Drawer>
       <CommandPalette open={buscaAberta} onClose={() => setBuscaAberta(false)} />
       <NovoProcessoModal />
+      <ReabrirProcessoModal />
     </div>
   );
 }

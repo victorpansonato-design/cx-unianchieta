@@ -1,0 +1,2583 @@
+{
+ "config": {
+  "etapas": [
+   {
+    "id": "1b097384-746a-4ef1-8f70-3a650df1528e",
+    "nome": "Demanda identificada",
+    "descricao": "Registre de onde veio a demanda e qual problema o aluno sente.",
+    "sinal": null,
+    "tarefasPadrao": []
+   },
+   {
+    "id": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+    "nome": "Mapeamento do cenário atual",
+    "descricao": "Anexe o diagrama e o BPMN do escritório de processos e descreva como o processo funciona hoje.",
+    "sinal": null,
+    "tarefasPadrao": []
+   },
+   {
+    "id": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+    "nome": "Diagnóstico",
+    "descricao": "Liste as dores observadas e o efeito na experiência do aluno.",
+    "sinal": null,
+    "tarefasPadrao": []
+   },
+   {
+    "id": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+    "nome": "Proposta de melhoria",
+    "descricao": "Monte o fluxo proposto e, se houver, informe o link do protótipo.",
+    "sinal": null,
+    "tarefasPadrao": []
+   },
+   {
+    "id": "725368a6-4e87-42c4-9824-a785e3ab1697",
+    "nome": "Apresentação à diretoria",
+    "descricao": "Leve o resumo impresso e registre o retorno da diretoria nos andamentos.",
+    "sinal": "diretoria",
+    "tarefasPadrao": []
+   },
+   {
+    "id": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+    "nome": "Encaminhado ao TI",
+    "descricao": "Registre o que foi pedido ao TI e o módulo do Lyceum envolvido.",
+    "sinal": "ti",
+    "tarefasPadrao": []
+   },
+   {
+    "id": "5c65a744-fb6a-4b5c-bb7c-4f9af70a78b3",
+    "nome": "Em implantação",
+    "descricao": "Acompanhe as tarefas de implantação com o TI.",
+    "sinal": "ti",
+    "tarefasPadrao": []
+   },
+   {
+    "id": "5c52db52-03d5-47fd-866a-79d8f664790a",
+    "nome": "Em acompanhamento",
+    "descricao": "Compare os indicadores de antes e depois.",
+    "sinal": null,
+    "tarefasPadrao": []
+   },
+   {
+    "id": "ddc95d79-737b-47c4-a197-58003f2f47d7",
+    "nome": "Concluído",
+    "descricao": "Processo encerrado. O histórico fica disponível para consulta.",
+    "sinal": null,
+    "tarefasPadrao": []
+   }
+  ],
+  "membros": [
+   {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani",
+    "funcao": ""
+   },
+   {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa",
+    "funcao": ""
+   },
+   {
+    "id": "db5f7603-f5ab-47ae-8a57-d3143ecc2a2d",
+    "nome": "Larissa Lopes",
+    "funcao": ""
+   },
+   {
+    "id": "06a8f7f7-b361-448a-8621-c03002264fb5",
+    "nome": "Isabela Freitas",
+    "funcao": ""
+   }
+  ],
+  "setores": [
+   {
+    "id": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+    "nome": "Costumer Experience"
+   },
+   {
+    "id": "11c4b417-3360-45a3-9026-c13d42932ce1",
+    "nome": "Secretaria Acadêmica"
+   },
+   {
+    "id": "71704f26-6271-47ea-ae00-17b8891e39d1",
+    "nome": "Financeiro"
+   },
+   {
+    "id": "a6af8b45-49de-4c11-9f00-d42ba7221433",
+    "nome": "Captação"
+   },
+   {
+    "id": "6128c363-0ccd-4b78-8ddd-0576209dd0cb",
+    "nome": "Ouvidoria"
+   },
+   {
+    "id": "a459bc4c-b50a-4d3e-adbc-0cf5709aec3e",
+    "nome": "Tecnologia da Informação"
+   },
+   {
+    "id": "df126a11-c35c-46f3-bd82-4be6f9bb66d2",
+    "nome": "Coordenação de Cursos"
+   }
+  ],
+  "origens": [
+   {
+    "id": "a582eeca-6d2a-4416-b0cd-a508d0564e29",
+    "nome": "Ouvidoria"
+   },
+   {
+    "id": "8a74c608-de0b-4aba-b181-fb0e3fe19521",
+    "nome": "Atendimento ao aluno"
+   },
+   {
+    "id": "2d133215-848c-4ee6-b9fe-a21d39d2d6cc",
+    "nome": "Solicitação da diretoria"
+   },
+   {
+    "id": "7faa4ead-8901-480c-9f1e-df51bddbd1c9",
+    "nome": "Análise interna do CX"
+   },
+   {
+    "id": "0d09e23d-67fe-4143-a6c5-998bbcf344df",
+    "nome": "Feedbacks de outros setores internos"
+   }
+  ],
+  "prioridades": [
+   {
+    "id": "0e19e65c-1e2c-4d7b-ae20-9d5b2ddc672e",
+    "nome": "Baixa"
+   },
+   {
+    "id": "2adc86f6-48f8-4787-b1dc-29ed465db54f",
+    "nome": "Média"
+   },
+   {
+    "id": "b355f87b-6e5d-4aad-8953-ca951b81284b",
+    "nome": "Alta"
+   }
+  ],
+  "impactos": [
+   {
+    "id": "38a44c74-49af-45f1-af63-a284eab119a4",
+    "nome": "Baixo"
+   },
+   {
+    "id": "87058b42-de19-4feb-80bd-d60179d66ebf",
+    "nome": "Médio"
+   },
+   {
+    "id": "cb90aaa4-6c88-424f-83f0-c041448d80b6",
+    "nome": "Alto"
+   }
+  ]
+ },
+ "processos": [
+  {
+   "id": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "codigo": "CX-001",
+   "titulo": "Devoluções",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc"
+   ],
+   "envolvidos": "Financeiro (contas a receber) e Secretaria Acadêmica",
+   "origemId": "8a74c608-de0b-4aba-b181-fb0e3fe19521",
+   "prioridadeId": "b355f87b-6e5d-4aad-8953-ca951b81284b",
+   "impactoId": "cb90aaa4-6c88-424f-83f0-c041448d80b6",
+   "tags": [
+    "financeiro",
+    "reembolso"
+   ],
+   "abertura": "2026-08-03",
+   "prazo": "2026-09-29",
+   "conclusao": null,
+   "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+   "historicoEtapas": [
+    {
+     "etapaId": "1b097384-746a-4ef1-8f70-3a650df1528e",
+     "entrada": "2026-08-03T12:15:00.000Z"
+    },
+    {
+     "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+     "entrada": "2026-08-07T17:20:00.000Z"
+    },
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-08-17T13:05:00.000Z"
+    },
+    {
+     "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+     "entrada": "2026-08-28T19:30:00.000Z"
+    },
+    {
+     "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+     "entrada": "2026-09-15T12:40:00.000Z"
+    },
+    {
+     "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+     "entrada": "2026-09-24T11:10:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "O pedido de devolução de valores (matrícula cancelada, pagamento em duplicidade, trancamento) é aberto no atendimento, segue por e-mail para a Secretaria e depois para o Financeiro. Não há protocolo único nem prazo definido para o aluno.",
+    "dores": "O pedido muda de mão três vezes por e-mail e se perde entre os setores.\nO aluno não tem como acompanhar o andamento e liga de novo para perguntar.\nCada setor confere os mesmos documentos, e o cálculo do valor é refeito à mão.",
+    "efeitoAluno": "O aluno espera semanas sem retorno, sente que o dinheiro dele ficou preso e leva a reclamação para a Ouvidoria e para o Reclame Aqui."
+   },
+   "antes": {
+    "observacoes": "O atendimento registra o pedido num formulário em papel, digitaliza e envia por e-mail à Secretaria. A Secretaria confere a situação acadêmica e repassa ao Financeiro, que calcula o valor e agenda a devolução. O aluno só é avisado quando o dinheiro cai na conta."
+   },
+   "depois": {
+    "passos": [
+     {
+      "id": "eae12c9b-ad87-4821-b7ce-cd28f2dbd1f9",
+      "nome": "Aluno solicita a devolução pelo portal, já com os dados bancários",
+      "responsavel": "Aluno",
+      "sistema": "Portal do aluno"
+     },
+     {
+      "id": "dca1632d-945f-4649-90df-37b8fb4d1c5c",
+      "nome": "Secretaria confirma a situação acadêmica",
+      "responsavel": "Secretaria Acadêmica",
+      "sistema": "Lyceum"
+     },
+     {
+      "id": "acdf7842-3104-4058-8609-5c81f7d6f596",
+      "nome": "Financeiro calcula o valor e aprova",
+      "responsavel": "Financeiro",
+      "sistema": "Lyceum"
+     },
+     {
+      "id": "298f94f6-86e6-4e91-86a1-06fa7279919a",
+      "nome": "Devolução paga e aluno avisado por e-mail",
+      "responsavel": "Financeiro",
+      "sistema": "E-mail automático"
+     }
+    ],
+    "prototipoUrl": "",
+    "observacoes": "Um único protocolo acompanha o pedido do começo ao fim, e o aluno vê em que etapa ele está."
+   },
+   "indicadores": [
+    {
+     "id": "bb9fbd60-1208-4deb-accf-6dc6b0d6a2b8",
+     "nome": "Tempo médio até a devolução",
+     "antes": "32 dias",
+     "depois": "",
+     "fonte": "Planilha de devoluções do Financeiro"
+    },
+    {
+     "id": "95f31306-497b-4ab4-baf4-f7c0947b69f6",
+     "nome": "Reclamações sobre devolução por mês",
+     "antes": "18",
+     "depois": "",
+     "fonte": "Relatório mensal da Ouvidoria"
+    }
+   ],
+   "lyceum": "Financeiro: cancelamento de títulos e estorno",
+   "demandaId": null,
+   "criadoEm": "2026-08-03T12:15:00.000Z",
+   "atualizadoEm": "2026-09-24T11:15:00.000Z"
+  },
+  {
+   "id": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "codigo": "CX-002",
+   "titulo": "Reclame Aqui",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc"
+   ],
+   "envolvidos": "Ouvidoria e setores citados nas reclamações",
+   "origemId": "a582eeca-6d2a-4416-b0cd-a508d0564e29",
+   "prioridadeId": null,
+   "impactoId": "cb90aaa4-6c88-424f-83f0-c041448d80b6",
+   "tags": [
+    "reputação"
+   ],
+   "abertura": "2026-08-10",
+   "prazo": "2026-09-25",
+   "conclusao": null,
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "historicoEtapas": [
+    {
+     "etapaId": "1b097384-746a-4ef1-8f70-3a650df1528e",
+     "entrada": "2026-08-10T13:00:00.000Z"
+    },
+    {
+     "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+     "entrada": "2026-08-14T12:30:00.000Z"
+    },
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-08-26T18:45:00.000Z"
+    },
+    {
+     "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+     "entrada": "2026-09-24T11:20:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "As reclamações publicadas no Reclame Aqui são respondidas sem um responsável fixo e sem prazo interno. Parte delas fica sem resposta e derruba a nota da instituição.",
+    "dores": "Ninguém é avisado quando entra uma reclamação nova.\nA resposta depende de informações de outros setores, que demoram a chegar.\nNão há texto padrão para os casos mais comuns.",
+    "efeitoAluno": "O aluno se sente ignorado e a reclamação fica pública sem resposta, o que também afasta quem está pensando em se matricular."
+   },
+   "antes": {
+    "observacoes": "A Ouvidoria confere o site quando dá tempo, copia a reclamação num e-mail para o setor envolvido e espera o retorno para responder."
+   },
+   "depois": {
+    "passos": [
+     {
+      "id": "60a7114c-edc4-40a1-a937-638b349d8725",
+      "nome": "Alerta diário das reclamações novas",
+      "responsavel": "CX",
+      "sistema": "Reclame Aqui"
+     },
+     {
+      "id": "2ee99d3f-757d-4b9a-b4c7-041a59282a70",
+      "nome": "Triagem e envio ao setor com prazo de 48 horas",
+      "responsavel": "CX",
+      "sistema": "E-mail"
+     },
+     {
+      "id": "13c5628b-562b-4c31-9609-732125cf8cf4",
+      "nome": "Resposta pública com texto padrão revisado",
+      "responsavel": "CX",
+      "sistema": "Reclame Aqui"
+     },
+     {
+      "id": "6301fed9-f6fe-4387-8600-f6e34e64b91b",
+      "nome": "Contato direto com o aluno para resolver o caso",
+      "responsavel": "Setor envolvido",
+      "sistema": "Telefone / WhatsApp"
+     }
+    ],
+    "prototipoUrl": "",
+    "observacoes": "Em montagem: modelos de resposta para os cinco assuntos mais frequentes."
+   },
+   "indicadores": [
+    {
+     "id": "f17f8d63-d4cf-4303-8936-d604564d6b19",
+     "nome": "Tempo médio de resposta",
+     "antes": "6 dias",
+     "depois": "",
+     "fonte": "Painel do Reclame Aqui"
+    },
+    {
+     "id": "0bcb1884-f6b3-4271-b618-56c731ccf693",
+     "nome": "Reclamações respondidas",
+     "antes": "71%",
+     "depois": "",
+     "fonte": "Painel do Reclame Aqui"
+    }
+   ],
+   "lyceum": "",
+   "demandaId": null,
+   "criadoEm": "2026-08-10T13:00:00.000Z",
+   "atualizadoEm": "2026-09-24T11:20:00.000Z"
+  },
+  {
+   "id": "f7ca9a7a-7c85-4b98-adcc-263cf2cf3b6c",
+   "codigo": "CX-003",
+   "titulo": "jaleco",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc"
+   ],
+   "envolvidos": "Coordenações dos cursos da saúde",
+   "origemId": "8a74c608-de0b-4aba-b181-fb0e3fe19521",
+   "prioridadeId": "0e19e65c-1e2c-4d7b-ae20-9d5b2ddc672e",
+   "impactoId": "38a44c74-49af-45f1-af63-a284eab119a4",
+   "tags": [],
+   "abertura": "2026-09-24",
+   "prazo": null,
+   "conclusao": "2026-09-24",
+   "etapaId": "ddc95d79-737b-47c4-a197-58003f2f47d7",
+   "historicoEtapas": [
+    {
+     "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+     "entrada": "2026-09-24T11:40:00.000Z"
+    },
+    {
+     "etapaId": "ddc95d79-737b-47c4-a197-58003f2f47d7",
+     "entrada": "2026-09-24T13:05:00.000Z"
+    }
+   ],
+   "situacao": "concluido",
+   "problema": {
+    "descricao": "Alunos dos cursos da saúde chegavam às aulas práticas sem o jaleco no modelo exigido, porque a orientação só era dada em sala.",
+    "dores": "Cada coordenação passava uma regra diferente.\nNão havia informação sobre onde comprar nem sobre o bordado do nome.",
+    "efeitoAluno": "O aluno era impedido de entrar no laboratório e perdia a aula prática."
+   },
+   "antes": {
+    "observacoes": "A orientação era dada pelo professor na primeira aula prática."
+   },
+   "depois": {
+    "passos": [
+     {
+      "id": "f29d81ca-3f12-4022-afeb-61e4f6731bb4",
+      "nome": "Regra única do jaleco publicada no portal",
+      "responsavel": "Coordenação de Cursos",
+      "sistema": "Portal do aluno"
+     },
+     {
+      "id": "a3a5b682-3bd5-4748-ac48-23fee481296f",
+      "nome": "Aviso no e-mail de boas-vindas do calouro",
+      "responsavel": "CX",
+      "sistema": "E-mail"
+     }
+    ],
+    "prototipoUrl": "",
+    "observacoes": "Aprovado pela diretoria e publicado no mesmo dia."
+   },
+   "indicadores": [],
+   "lyceum": "",
+   "demandaId": null,
+   "criadoEm": "2026-09-24T11:40:00.000Z",
+   "atualizadoEm": "2026-09-24T13:05:00.000Z"
+  },
+  {
+   "id": "75c262fb-db60-4d0a-be91-96016b387417",
+   "codigo": "CX-004",
+   "titulo": "Sucesso ao Aluno (Pós Venda)",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "06a8f7f7-b361-448a-8621-c03002264fb5"
+   ],
+   "envolvidos": "Captação e coordenações de curso",
+   "origemId": "2d133215-848c-4ee6-b9fe-a21d39d2d6cc",
+   "prioridadeId": "b355f87b-6e5d-4aad-8953-ca951b81284b",
+   "impactoId": "cb90aaa4-6c88-424f-83f0-c041448d80b6",
+   "tags": [
+    "calouros",
+    "retenção"
+   ],
+   "abertura": "2026-07-27",
+   "prazo": "2026-12-31",
+   "conclusao": null,
+   "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+   "historicoEtapas": [
+    {
+     "etapaId": "1b097384-746a-4ef1-8f70-3a650df1528e",
+     "entrada": "2026-07-27T12:00:00.000Z"
+    },
+    {
+     "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+     "entrada": "2026-08-03T13:30:00.000Z"
+    },
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-08-18T17:00:00.000Z"
+    },
+    {
+     "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+     "entrada": "2026-09-01T12:20:00.000Z"
+    },
+    {
+     "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+     "entrada": "2026-09-24T11:30:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "Depois que o aluno se matricula, o contato da instituição acaba. Ninguém acompanha o calouro nas primeiras semanas, que é quando a maioria das desistências acontece.",
+    "dores": "A Captação passa o aluno adiante e não sabe o que acontece depois.\nDúvidas simples (acesso ao portal, horário, boleto) viram motivo de desistência.\nNão existe uma lista de alunos em risco nos primeiros meses.",
+    "efeitoAluno": "O calouro se sente sozinho logo no começo e desiste antes da primeira prova."
+   },
+   "antes": {
+    "observacoes": "O aluno recebe o e-mail de confirmação da matrícula e, a partir daí, só tem contato com a instituição se procurar a Secretaria."
+   },
+   "depois": {
+    "passos": [
+     {
+      "id": "174d54ec-838a-4b5e-8c08-875a66ad32d4",
+      "nome": "Boas-vindas por telefone na primeira semana",
+      "responsavel": "CX",
+      "sistema": "Telefone / WhatsApp"
+     },
+     {
+      "id": "ae5bca75-1666-43e0-8daf-4f510ffc7981",
+      "nome": "Contato de acompanhamento aos 30 dias",
+      "responsavel": "CX",
+      "sistema": "WhatsApp"
+     },
+     {
+      "id": "175b95ab-7f11-4398-85d1-798a280fbca4",
+      "nome": "Alerta para quem faltou nas duas primeiras semanas",
+      "responsavel": "Coordenação de Cursos",
+      "sistema": "Lyceum"
+     },
+     {
+      "id": "9c308fe6-91a8-4fbf-83ab-3cb2a8ec86b1",
+      "nome": "Pesquisa de satisfação aos 90 dias",
+      "responsavel": "CX",
+      "sistema": "Formulário online"
+     }
+    ],
+    "prototipoUrl": "",
+    "observacoes": "Régua de contato dos primeiros 90 dias, com os cursos divididos entre a equipe CX."
+   },
+   "indicadores": [
+    {
+     "id": "dfa3b6f6-ecd6-4607-becc-564d4d16983a",
+     "nome": "Calouros que desistem no primeiro semestre",
+     "antes": "14%",
+     "depois": "",
+     "fonte": "Relatório de evasão da Secretaria"
+    }
+   ],
+   "lyceum": "Relatório de frequência por turma",
+   "demandaId": null,
+   "criadoEm": "2026-07-27T12:00:00.000Z",
+   "atualizadoEm": "2026-09-24T13:40:00.000Z"
+  },
+  {
+   "id": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "codigo": "CX-005",
+   "titulo": "Machine Learning",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "b25f3938-a2f3-4824-9eef-dc9bd865cca4"
+   ],
+   "envolvidos": "Tecnologia da Informação (equipe de dados)",
+   "origemId": "2d133215-848c-4ee6-b9fe-a21d39d2d6cc",
+   "prioridadeId": "b355f87b-6e5d-4aad-8953-ca951b81284b",
+   "impactoId": "cb90aaa4-6c88-424f-83f0-c041448d80b6",
+   "tags": [
+    "evasão",
+    "dados"
+   ],
+   "abertura": "2026-08-11",
+   "prazo": "2026-09-22",
+   "conclusao": null,
+   "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+   "historicoEtapas": [
+    {
+     "etapaId": "1b097384-746a-4ef1-8f70-3a650df1528e",
+     "entrada": "2026-08-11T12:00:00.000Z"
+    },
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-08-25T13:15:00.000Z"
+    },
+    {
+     "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+     "entrada": "2026-09-08T17:30:00.000Z"
+    },
+    {
+     "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+     "entrada": "2026-09-17T12:00:00.000Z"
+    },
+    {
+     "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+     "entrada": "2026-09-24T12:20:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "A diretoria pediu um estudo para prever quais alunos têm mais chance de evadir, usando os dados que já existem no Lyceum (frequência, notas e situação financeira), para o CX agir antes da desistência.",
+    "dores": "Hoje a evasão só é percebida quando o aluno já pediu o cancelamento.\nOs dados de frequência, notas e financeiro ficam em relatórios separados.\nNão há um critério comum para dizer que um aluno está em risco.",
+    "efeitoAluno": "O aluno em dificuldade não recebe ajuda a tempo, e a primeira conversa com a instituição acontece no pedido de cancelamento."
+   },
+   "antes": {
+    "observacoes": "Cada coordenação olha a própria planilha de faltas no fim do mês. O Financeiro trata a inadimplência à parte, sem cruzar com a situação acadêmica."
+   },
+   "depois": {
+    "passos": [
+     {
+      "id": "b74caad9-ca6b-41fe-afb2-12c1fe2e7e0f",
+      "nome": "Extração mensal dos dados de frequência, notas e financeiro",
+      "responsavel": "TI (equipe de dados)",
+      "sistema": "Lyceum"
+     },
+     {
+      "id": "faf9d3f0-747a-4e2d-9537-6e768ad59885",
+      "nome": "Modelo calcula o risco de evasão de cada aluno",
+      "responsavel": "TI (equipe de dados)",
+      "sistema": "Modelo preditivo"
+     },
+     {
+      "id": "cf47171e-bf65-444b-bdb1-f88c894037c3",
+      "nome": "Lista dos alunos em risco enviada ao CX",
+      "responsavel": "TI (equipe de dados)",
+      "sistema": "Relatório"
+     },
+     {
+      "id": "1a3c86e8-ccd4-4812-bf7e-955b131acca4",
+      "nome": "CX entra em contato e registra o resultado",
+      "responsavel": "CX",
+      "sistema": "Telefone / WhatsApp"
+     }
+    ],
+    "prototipoUrl": "",
+    "observacoes": "Primeira versão restrita a dois cursos, para validar o modelo antes de ampliar."
+   },
+   "indicadores": [
+    {
+     "id": "83d38ceb-0726-43bb-80b3-8c6244c55d85",
+     "nome": "Taxa de evasão semestral",
+     "antes": "11%",
+     "depois": "",
+     "fonte": "Relatório de evasão da Secretaria"
+    }
+   ],
+   "lyceum": "Relatórios de frequência, notas e títulos em aberto",
+   "demandaId": null,
+   "criadoEm": "2026-08-11T12:00:00.000Z",
+   "atualizadoEm": "2026-09-24T12:20:00.000Z"
+  },
+  {
+   "id": "5972356d-0152-4800-8334-0f4f993356f7",
+   "codigo": "CX-006",
+   "titulo": "Reopção de Curso",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "b25f3938-a2f3-4824-9eef-dc9bd865cca4"
+   ],
+   "envolvidos": "Secretaria Acadêmica e coordenações de curso",
+   "origemId": "8a74c608-de0b-4aba-b181-fb0e3fe19521",
+   "prioridadeId": "2adc86f6-48f8-4787-b1dc-29ed465db54f",
+   "impactoId": "87058b42-de19-4feb-80bd-d60179d66ebf",
+   "tags": [
+    "secretaria"
+   ],
+   "abertura": "2026-07-20",
+   "prazo": "2026-09-01",
+   "conclusao": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "historicoEtapas": [
+    {
+     "etapaId": "1b097384-746a-4ef1-8f70-3a650df1528e",
+     "entrada": "2026-07-20T13:00:00.000Z"
+    },
+    {
+     "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+     "entrada": "2026-07-28T17:00:00.000Z"
+    },
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-09-24T11:35:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "O aluno que quer trocar de curso não encontra o passo a passo. O pedido passa pela Secretaria, pela coordenação de origem e pela de destino, e cada uma pede documentos diferentes.",
+    "dores": "Não existe um prazo único para pedir a reopção.\nO aproveitamento das disciplinas é analisado duas vezes.\nO aluno só descobre a nova mensalidade depois de aprovada a troca.",
+    "efeitoAluno": "O aluno fica semanas sem saber se vai mudar de curso e, em alguns casos, desiste da instituição no meio do caminho."
+   },
+   "antes": {
+    "observacoes": "O pedido é feito no balcão da Secretaria, em formulário de papel, e circula entre as coordenações por malote interno."
+   },
+   "depois": {
+    "passos": [],
+    "prototipoUrl": "",
+    "observacoes": ""
+   },
+   "indicadores": [
+    {
+     "id": "e031952f-3756-44a7-9657-e63bc0e8e439",
+     "nome": "Tempo médio para concluir a reopção",
+     "antes": "21 dias",
+     "depois": "",
+     "fonte": "Secretaria Acadêmica"
+    }
+   ],
+   "lyceum": "Transferência interna de curso",
+   "demandaId": null,
+   "criadoEm": "2026-07-20T13:00:00.000Z",
+   "atualizadoEm": "2026-09-24T11:40:00.000Z"
+  },
+  {
+   "id": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "codigo": "CX-007",
+   "titulo": "Sistema de Organização",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "db5f7603-f5ab-47ae-8a57-d3143ecc2a2d",
+    "06a8f7f7-b361-448a-8621-c03002264fb5"
+   ],
+   "envolvidos": "Tecnologia da Informação (Funcionário Online)",
+   "origemId": "7faa4ead-8901-480c-9f1e-df51bddbd1c9",
+   "prioridadeId": "b355f87b-6e5d-4aad-8953-ca951b81284b",
+   "impactoId": "87058b42-de19-4feb-80bd-d60179d66ebf",
+   "tags": [
+    "ferramenta interna"
+   ],
+   "abertura": "2026-08-24",
+   "prazo": "2026-09-25",
+   "conclusao": null,
+   "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+   "historicoEtapas": [
+    {
+     "etapaId": "1b097384-746a-4ef1-8f70-3a650df1528e",
+     "entrada": "2026-08-24T12:00:00.000Z"
+    },
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-09-01T13:00:00.000Z"
+    },
+    {
+     "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+     "entrada": "2026-09-08T12:30:00.000Z"
+    },
+    {
+     "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+     "entrada": "2026-09-16T17:00:00.000Z"
+    },
+    {
+     "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+     "entrada": "2026-09-24T11:50:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "O CX acompanha os processos em planilhas, e-mails e anotações soltas. Não há um lugar único para ver em que etapa cada processo está, o que venceu e o que depende da diretoria ou do TI.",
+    "dores": "Cada pessoa da equipe mantém a própria planilha.\nO histórico de reuniões e decisões se perde nos e-mails.\nPreparar o resumo para a diretoria leva horas.",
+    "efeitoAluno": "Indireto: as melhorias chegam ao aluno mais devagar, porque a equipe gasta tempo se organizando em vez de resolver."
+   },
+   "antes": {
+    "observacoes": "Uma planilha por processo, atualizada à mão, e um resumo para a diretoria montado em apresentação a cada reunião."
+   },
+   "depois": {
+    "passos": [
+     {
+      "id": "9cb08faa-c0bf-4fa9-acbb-c849dabf501b",
+      "nome": "Demanda registrada na caixa de demandas",
+      "responsavel": "CX",
+      "sistema": "Customer Experience"
+     },
+     {
+      "id": "ce2f6885-23b0-4e02-8565-2c981f4db9a2",
+      "nome": "Processo acompanhado por etapas, com tarefas e andamentos",
+      "responsavel": "CX",
+      "sistema": "Customer Experience"
+     },
+     {
+      "id": "d225c14c-b5ef-48f6-a535-dc69438e1574",
+      "nome": "Relatório impresso para a diretoria",
+      "responsavel": "CX",
+      "sistema": "Customer Experience"
+     }
+    ],
+    "prototipoUrl": "https://cx-unianchieta.vercel.app",
+    "observacoes": "Pedido ao TI: publicar o sistema dentro do Funcionário Online, com acesso para a equipe CX e a diretoria."
+   },
+   "indicadores": [
+    {
+     "id": "98fb8a4a-728b-46f0-b95b-1f5addc94e02",
+     "nome": "Tempo para montar o resumo da diretoria",
+     "antes": "4 horas",
+     "depois": "",
+     "fonte": "Estimativa da equipe CX"
+    }
+   ],
+   "lyceum": "Nenhum (hospedado no Funcionário Online)",
+   "demandaId": null,
+   "criadoEm": "2026-08-24T12:00:00.000Z",
+   "atualizadoEm": "2026-09-24T11:50:00.000Z"
+  },
+  {
+   "id": "42eba67b-ce0b-4e28-9193-a06a4dd36878",
+   "codigo": "CX-008",
+   "titulo": "teste",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc"
+   ],
+   "envolvidos": "",
+   "origemId": null,
+   "prioridadeId": null,
+   "impactoId": null,
+   "tags": [],
+   "abertura": "2026-09-24",
+   "prazo": null,
+   "conclusao": null,
+   "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+   "historicoEtapas": [
+    {
+     "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+     "entrada": "2026-09-24T12:00:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "",
+    "dores": "",
+    "efeitoAluno": ""
+   },
+   "antes": {
+    "observacoes": ""
+   },
+   "depois": {
+    "passos": [],
+    "prototipoUrl": "",
+    "observacoes": ""
+   },
+   "indicadores": [],
+   "lyceum": "",
+   "demandaId": null,
+   "criadoEm": "2026-09-24T12:00:00.000Z",
+   "atualizadoEm": "2026-09-24T12:00:00.000Z"
+  },
+  {
+   "id": "09770b2c-bca4-45a1-b14d-13f229dc4e11",
+   "codigo": "CX-009",
+   "titulo": "Ouvidoria",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "b25f3938-a2f3-4824-9eef-dc9bd865cca4"
+   ],
+   "envolvidos": "Ouvidoria",
+   "origemId": "a582eeca-6d2a-4416-b0cd-a508d0564e29",
+   "prioridadeId": "b355f87b-6e5d-4aad-8953-ca951b81284b",
+   "impactoId": "cb90aaa4-6c88-424f-83f0-c041448d80b6",
+   "tags": [
+    "ouvidoria"
+   ],
+   "abertura": "2026-09-24",
+   "prazo": "2026-09-25",
+   "conclusao": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "historicoEtapas": [
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-09-24T13:20:00.000Z"
+    }
+   ],
+   "situacao": "andamento",
+   "problema": {
+    "descricao": "As manifestações chegam à Ouvidoria pelo Funcionário Online e são direcionadas aos setores pelo sistema ou por e-mail. O acompanhamento dos prazos e a cobrança dos retornos são feitos à mão, e o aluno não sabe em que ponto está a manifestação.",
+    "dores": "A mesma manifestação chega por canais diferentes e é registrada duas vezes.\nOs setores respondem fora do prazo e a Ouvidoria precisa cobrar.\nNão há relatório dos assuntos mais frequentes.",
+    "efeitoAluno": "O aluno não sabe se a manifestação foi lida e volta a reclamar, agora mais insatisfeito."
+   },
+   "antes": {
+    "observacoes": "O mapa de 13/07/2026 (anexo) mostra as etapas de hoje: receber, analisar e classificar, direcionar ao setor, acompanhar o tratamento, validar a resposta e comunicar ao solicitante. Além das manifestações, a Ouvidoria também cuida do Reclame Aqui e da pesquisa de satisfação."
+   },
+   "depois": {
+    "passos": [],
+    "prototipoUrl": "",
+    "observacoes": ""
+   },
+   "indicadores": [
+    {
+     "id": "6aa806b1-1d6b-4ed7-97c4-92d6548bc7fb",
+     "nome": "Manifestações respondidas no prazo",
+     "antes": "64%",
+     "depois": "",
+     "fonte": "Relatório mensal da Ouvidoria"
+    }
+   ],
+   "lyceum": "",
+   "demandaId": null,
+   "criadoEm": "2026-09-24T13:20:00.000Z",
+   "atualizadoEm": "2026-09-24T14:20:00.000Z"
+  },
+  {
+   "id": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "codigo": "CX-010",
+   "titulo": "Emissão de declarações",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "responsaveisIds": [
+    "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "06a8f7f7-b361-448a-8621-c03002264fb5"
+   ],
+   "envolvidos": "Secretaria Acadêmica e Tecnologia da Informação",
+   "origemId": "8a74c608-de0b-4aba-b181-fb0e3fe19521",
+   "prioridadeId": "2adc86f6-48f8-4787-b1dc-29ed465db54f",
+   "impactoId": "cb90aaa4-6c88-424f-83f0-c041448d80b6",
+   "tags": [
+    "secretaria",
+    "autoatendimento"
+   ],
+   "abertura": "2026-06-15",
+   "prazo": "2026-09-30",
+   "conclusao": "2026-09-18",
+   "etapaId": "ddc95d79-737b-47c4-a197-58003f2f47d7",
+   "historicoEtapas": [
+    {
+     "etapaId": "1b097384-746a-4ef1-8f70-3a650df1528e",
+     "entrada": "2026-06-15T12:00:00.000Z"
+    },
+    {
+     "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+     "entrada": "2026-06-19T13:30:00.000Z"
+    },
+    {
+     "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+     "entrada": "2026-06-29T17:00:00.000Z"
+    },
+    {
+     "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+     "entrada": "2026-07-08T12:30:00.000Z"
+    },
+    {
+     "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+     "entrada": "2026-07-20T13:00:00.000Z"
+    },
+    {
+     "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+     "entrada": "2026-07-23T18:00:00.000Z"
+    },
+    {
+     "etapaId": "5c65a744-fb6a-4b5c-bb7c-4f9af70a78b3",
+     "entrada": "2026-08-04T12:00:00.000Z"
+    },
+    {
+     "etapaId": "5c52db52-03d5-47fd-866a-79d8f664790a",
+     "entrada": "2026-08-24T13:00:00.000Z"
+    },
+    {
+     "etapaId": "ddc95d79-737b-47c4-a197-58003f2f47d7",
+     "entrada": "2026-09-18T19:00:00.000Z"
+    }
+   ],
+   "situacao": "concluido",
+   "problema": {
+    "descricao": "Para pedir uma declaração de matrícula, de frequência ou de conclusão, o aluno precisava ir ao balcão da Secretaria, preencher um formulário e voltar dias depois para retirar o documento assinado.",
+    "dores": "Filas no balcão no começo de cada semestre, quando todo mundo precisa de declaração para estágio e transporte.\nA Secretaria digitava à mão dados que já estavam no Lyceum.\nO aluno que trabalha ou estuda à noite não conseguia chegar no horário do balcão.",
+    "efeitoAluno": "O aluno perdia prazos de estágio, bolsa e passe escolar esperando um documento simples, e via a instituição como burocrática."
+   },
+   "antes": {
+    "observacoes": "O aluno pede no balcão, a Secretaria registra o pedido em planilha, emite a declaração no editor de texto com os dados copiados do Lyceum, colhe a assinatura e deixa o documento para retirada em até três dias úteis."
+   },
+   "depois": {
+    "passos": [
+     {
+      "id": "ad08303f-7960-4cfd-8ffe-43b9d8fdcd09",
+      "nome": "Aluno escolhe a declaração no portal",
+      "responsavel": "Aluno",
+      "sistema": "Portal do aluno"
+     },
+     {
+      "id": "e98c7cef-05f2-445e-b4e7-ecac4e098991",
+      "nome": "Declaração gerada na hora com os dados do Lyceum",
+      "responsavel": "Sistema",
+      "sistema": "Lyceum"
+     },
+     {
+      "id": "9e4dc62d-3437-473f-b1e3-e5682b21de06",
+      "nome": "Assinatura digital e código de validação",
+      "responsavel": "Sistema",
+      "sistema": "Assinatura digital"
+     },
+     {
+      "id": "d5577f9b-4bcc-4b07-9eeb-ff195acfe68f",
+      "nome": "Casos fora do padrão vão para a Secretaria",
+      "responsavel": "Secretaria Acadêmica",
+      "sistema": "Lyceum"
+     }
+    ],
+    "prototipoUrl": "",
+    "observacoes": "As declarações de matrícula, frequência e conclusão saem pelo portal. O balcão ficou para os casos fora do padrão."
+   },
+   "indicadores": [
+    {
+     "id": "9efc20fe-e062-4795-93ae-3390fead95ca",
+     "nome": "Tempo para o aluno receber a declaração",
+     "antes": "3 dias úteis",
+     "depois": "Na hora",
+     "fonte": "Planilha de pedidos da Secretaria"
+    },
+    {
+     "id": "c0e32470-5be8-4b74-baa5-052d8ac6650a",
+     "nome": "Pedidos de declaração no balcão por mês",
+     "antes": "420",
+     "depois": "65",
+     "fonte": "Planilha de pedidos da Secretaria"
+    }
+   ],
+   "lyceum": "Emissão de documentos: declarações de matrícula, frequência e conclusão",
+   "demandaId": null,
+   "criadoEm": "2026-06-15T12:00:00.000Z",
+   "atualizadoEm": "2026-09-18T19:00:00.000Z"
+  }
+ ],
+ "tarefas": [
+  {
+   "id": "0107bb37-6aba-42b8-b607-fe7f4c3df8e4",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "titulo": "Levantar com o Financeiro os tipos de devolução",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+   "concluida": true,
+   "concluidaEm": "2026-08-12T18:00:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-08-07T17:20:00.000Z"
+  },
+  {
+   "id": "42bb1401-01ec-4c60-bedd-0d3eeb0cb96e",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "titulo": "Mapear o fluxo atual com a Secretaria",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+   "concluida": true,
+   "concluidaEm": "2026-08-14T14:30:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-08-07T17:20:00.000Z"
+  },
+  {
+   "id": "4665ae76-984d-4740-afbd-e924003ef5ae",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "titulo": "Preparar o resumo impresso para a diretoria",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+   "concluida": true,
+   "concluidaEm": "2026-09-18T20:10:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-09-15T12:40:00.000Z"
+  },
+  {
+   "id": "a144854c-250d-456d-84de-74e0d0a66bdf",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "titulo": "Validar com o TI o formulário de devolução no portal",
+   "responsavelId": null,
+   "responsavelExterno": "Equipe de sistemas (TI)",
+   "prazo": "2026-10-09",
+   "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T11:10:00.000Z"
+  },
+  {
+   "id": "0bf56288-2efa-48e6-ba0b-fa07d3991b36",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "titulo": "Levantar os assuntos mais reclamados dos últimos seis meses",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "concluida": true,
+   "concluidaEm": "2026-09-04T19:20:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-08-26T18:45:00.000Z"
+  },
+  {
+   "id": "5a7d7ecf-6ea9-4cf5-8e4a-176408731ccb",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "titulo": "Escrever os modelos de resposta",
+   "responsavelId": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T11:20:00.000Z"
+  },
+  {
+   "id": "c76f307d-4b38-4708-a4a2-2332a34886be",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "titulo": "Revisar os modelos de resposta",
+   "responsavelId": null,
+   "responsavelExterno": "Ouvidoria",
+   "prazo": "2026-10-06",
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T11:20:00.000Z"
+  },
+  {
+   "id": "c9083696-b0f8-4044-8185-ed819783ea8d",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "titulo": "Levantar a evasão de calouros do último ano",
+   "responsavelId": "06a8f7f7-b361-448a-8621-c03002264fb5",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "concluida": true,
+   "concluidaEm": "2026-08-25T14:00:00.000Z",
+   "concluidaPor": "Isabela Freitas",
+   "padrao": false,
+   "criadaEm": "2026-08-18T17:00:00.000Z"
+  },
+  {
+   "id": "460ea718-4380-48b0-9231-e4debe4ea61b",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "titulo": "Montar a régua de contato",
+   "responsavelId": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "concluida": true,
+   "concluidaEm": "2026-09-10T18:30:00.000Z",
+   "concluidaPor": "Bianca Lessa",
+   "padrao": false,
+   "criadaEm": "2026-09-01T12:20:00.000Z"
+  },
+  {
+   "id": "799a982d-f04e-4bbc-a1db-a1fea761150c",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "titulo": "Preparar o resumo impresso para a diretoria",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "concluida": true,
+   "concluidaEm": "2026-09-23T20:00:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-09-01T12:20:00.000Z"
+  },
+  {
+   "id": "6e461989-cd51-463f-b635-f2ab3187cebf",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "titulo": "Registrar o retorno da diretoria",
+   "responsavelId": "06a8f7f7-b361-448a-8621-c03002264fb5",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T11:30:00.000Z"
+  },
+  {
+   "id": "2ac264a9-517e-48a8-b786-da6929ea6367",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "titulo": "Levantar com o TI quais dados estão disponíveis",
+   "responsavelId": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "concluida": true,
+   "concluidaEm": "2026-09-02T19:00:00.000Z",
+   "concluidaPor": "Bianca Lessa",
+   "padrao": false,
+   "criadaEm": "2026-08-25T13:15:00.000Z"
+  },
+  {
+   "id": "52a74bd1-af0d-4e7a-b900-55ade5822314",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "titulo": "Definir os cursos do piloto",
+   "responsavelId": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "concluida": true,
+   "concluidaEm": "2026-09-15T13:45:00.000Z",
+   "concluidaPor": "Bianca Lessa",
+   "padrao": false,
+   "criadaEm": "2026-09-08T17:30:00.000Z"
+  },
+  {
+   "id": "d03be325-81e8-448a-8368-7d54577f74c0",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "titulo": "Receber a primeira extração de dados",
+   "responsavelId": null,
+   "responsavelExterno": "Equipe de dados (TI)",
+   "prazo": "2026-10-15",
+   "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T12:20:00.000Z"
+  },
+  {
+   "id": "f0920e94-e1cb-4727-8ee5-d1e0cb493ef9",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "titulo": "Mapear o fluxo atual com a Secretaria",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+   "concluida": true,
+   "concluidaEm": "2026-08-06T18:00:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-07-28T17:00:00.000Z"
+  },
+  {
+   "id": "5e778583-fbe2-4cf4-a171-627c052206cf",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "titulo": "Entrevistar alunos que pediram reopção",
+   "responsavelId": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T11:35:00.000Z"
+  },
+  {
+   "id": "f980ce2f-37d6-4f6f-9861-3a85878316b9",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "titulo": "Levantar os pedidos de reopção do último semestre",
+   "responsavelId": null,
+   "responsavelExterno": "Secretaria Acadêmica",
+   "prazo": "2026-10-02",
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T11:35:00.000Z"
+  },
+  {
+   "id": "8ec6fd6d-6b6d-4d69-a4ff-28ead8ebfd17",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "titulo": "Levantar o que cada pessoa acompanha hoje",
+   "responsavelId": "db5f7603-f5ab-47ae-8a57-d3143ecc2a2d",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "concluida": true,
+   "concluidaEm": "2026-09-04T14:00:00.000Z",
+   "concluidaPor": "Larissa Lopes",
+   "padrao": false,
+   "criadaEm": "2026-09-01T13:00:00.000Z"
+  },
+  {
+   "id": "dfd78336-057a-496e-b6a7-ed34724ee34e",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "titulo": "Validar o protótipo com a equipe",
+   "responsavelId": "06a8f7f7-b361-448a-8621-c03002264fb5",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "concluida": true,
+   "concluidaEm": "2026-09-12T19:00:00.000Z",
+   "concluidaPor": "Isabela Freitas",
+   "padrao": false,
+   "criadaEm": "2026-09-08T12:30:00.000Z"
+  },
+  {
+   "id": "29524905-b6b3-4bee-8e4e-7d2594949db3",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "titulo": "Apresentar o protótipo à diretoria",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+   "concluida": true,
+   "concluidaEm": "2026-09-22T14:00:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-09-16T17:00:00.000Z"
+  },
+  {
+   "id": "b08fd43c-318a-482b-85c6-edea939f9fa6",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "titulo": "Publicar o sistema no Funcionário Online",
+   "responsavelId": null,
+   "responsavelExterno": "Equipe de sistemas (TI)",
+   "prazo": "2026-10-09",
+   "etapaId": "8cd54436-145a-41bf-ba69-ea13ff42fa78",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T11:50:00.000Z"
+  },
+  {
+   "id": "75f6ae9a-9b8f-4ce6-ac87-0fd858f0a816",
+   "processoId": "09770b2c-bca4-45a1-b14d-13f229dc4e11",
+   "titulo": "Separar as manifestações do último semestre por assunto",
+   "responsavelId": "db5f7603-f5ab-47ae-8a57-d3143ecc2a2d",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "b94f6ea6-019a-4ffc-b35e-cd959b8e9d9d",
+   "concluida": false,
+   "concluidaEm": null,
+   "concluidaPor": null,
+   "padrao": false,
+   "criadaEm": "2026-09-24T13:20:00.000Z"
+  },
+  {
+   "id": "750edd29-ab75-4742-9840-c0a1c0440f6c",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "titulo": "Levantar os tipos de declaração mais pedidos",
+   "responsavelId": "06a8f7f7-b361-448a-8621-c03002264fb5",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+   "concluida": true,
+   "concluidaEm": "2026-06-24T14:00:00.000Z",
+   "concluidaPor": "Isabela Freitas",
+   "padrao": false,
+   "criadaEm": "2026-06-19T13:30:00.000Z"
+  },
+  {
+   "id": "e428386c-fc10-4df5-9655-dea554ac1699",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "titulo": "Mapear o fluxo atual com a Secretaria",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "31d6d859-5477-42d3-ba78-22ac4341c61e",
+   "concluida": true,
+   "concluidaEm": "2026-06-26T18:30:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-06-19T13:30:00.000Z"
+  },
+  {
+   "id": "07a45650-bd1e-4fcc-be2a-c6abc3e84762",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "titulo": "Montar o fluxo de autoatendimento",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "7c772de5-5d0b-49e9-9fc3-3a34b38cb74f",
+   "concluida": true,
+   "concluidaEm": "2026-07-15T13:00:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-07-08T12:30:00.000Z"
+  },
+  {
+   "id": "7eae4d24-2cad-4195-a1a0-8d309c3f99b4",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "titulo": "Preparar o resumo impresso para a diretoria",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "725368a6-4e87-42c4-9824-a785e3ab1697",
+   "concluida": true,
+   "concluidaEm": "2026-07-17T20:00:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-07-20T13:00:00.000Z"
+  },
+  {
+   "id": "e3c97eba-721f-499b-93b4-5cc1127e1120",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "titulo": "Validar os modelos de declaração com a Secretaria",
+   "responsavelId": "06a8f7f7-b361-448a-8621-c03002264fb5",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "5c65a744-fb6a-4b5c-bb7c-4f9af70a78b3",
+   "concluida": true,
+   "concluidaEm": "2026-08-12T17:00:00.000Z",
+   "concluidaPor": "Isabela Freitas",
+   "padrao": false,
+   "criadaEm": "2026-08-04T12:00:00.000Z"
+  },
+  {
+   "id": "4a4798fb-4e64-4aad-9d4e-b188acac88e1",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "titulo": "Divulgar o novo serviço aos alunos",
+   "responsavelId": "06a8f7f7-b361-448a-8621-c03002264fb5",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "5c65a744-fb6a-4b5c-bb7c-4f9af70a78b3",
+   "concluida": true,
+   "concluidaEm": "2026-08-21T12:30:00.000Z",
+   "concluidaPor": "Isabela Freitas",
+   "padrao": false,
+   "criadaEm": "2026-08-04T12:00:00.000Z"
+  },
+  {
+   "id": "ee51c904-f494-424d-89b9-0df7e022e9df",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "titulo": "Comparar os pedidos no balcão antes e depois",
+   "responsavelId": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+   "responsavelExterno": "",
+   "prazo": null,
+   "etapaId": "5c52db52-03d5-47fd-866a-79d8f664790a",
+   "concluida": true,
+   "concluidaEm": "2026-09-17T19:00:00.000Z",
+   "concluidaPor": "Victor Capitani",
+   "padrao": false,
+   "criadaEm": "2026-08-24T13:00:00.000Z"
+  }
+ ],
+ "andamentos": [
+  {
+   "id": "3db8c7bb-eea4-41d7-9276-4bf44dcdc6f8",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Demanda identificada”.",
+   "quando": "2026-08-03T12:15:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-03T12:15:00.000Z"
+  },
+  {
+   "id": "5e6f3857-76dd-494b-b1ad-fe4d6568b63a",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "etapa",
+   "texto": "Moveu de “Demanda identificada” para “Mapeamento do cenário atual”.",
+   "quando": "2026-08-07T17:20:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-07T17:20:00.000Z"
+  },
+  {
+   "id": "d34dca5f-bf98-4436-9194-31a1fd8cc9ba",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "etapa",
+   "texto": "Moveu de “Mapeamento do cenário atual” para “Diagnóstico”.",
+   "quando": "2026-08-17T13:05:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-17T13:05:00.000Z"
+  },
+  {
+   "id": "9e2f3dba-ad9f-41f5-bfc0-e8c0450ec3fc",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "etapa",
+   "texto": "Moveu de “Diagnóstico” para “Proposta de melhoria”.",
+   "quando": "2026-08-28T19:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-28T19:30:00.000Z"
+  },
+  {
+   "id": "ddc47284-edc3-426c-984b-903f9f45d519",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "etapa",
+   "texto": "Moveu de “Proposta de melhoria” para “Apresentação à diretoria”.",
+   "quando": "2026-09-15T12:40:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-15T12:40:00.000Z"
+  },
+  {
+   "id": "1abfe922-16fe-422f-9ea6-8f36a4c7a38f",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "etapa",
+   "texto": "Moveu de “Apresentação à diretoria” para “Encaminhado ao TI”.",
+   "quando": "2026-09-24T11:10:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T11:10:00.000Z"
+  },
+  {
+   "id": "94536642-b392-4806-b21a-f7d782545549",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "reuniao",
+   "texto": "Reunião com o Financeiro para entender os tipos de devolução e os documentos exigidos em cada um.",
+   "quando": "2026-08-12T17:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-08-12T17:00:00.000Z"
+  },
+  {
+   "id": "ecd68b48-0c4f-4126-9dbb-9c14865c43e7",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "retorno-diretoria",
+   "texto": "Diretoria aprovou a proposta e pediu prioridade por causa do volume de reclamações.",
+   "quando": "2026-09-22T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-22T13:00:00.000Z"
+  },
+  {
+   "id": "2db708b2-39f0-435f-b035-d1223d0a8efa",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "nota",
+   "texto": "Pedido enviado ao TI: formulário de devolução no portal do aluno, com acompanhamento do protocolo.",
+   "quando": "2026-09-24T11:15:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-24T11:15:00.000Z"
+  },
+  {
+   "id": "4d3b6ff9-ac22-4eee-9d30-1cf6a84afbbc",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Levantar com o Financeiro os tipos de devolução”.",
+   "quando": "2026-08-12T18:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-12T18:00:00.000Z"
+  },
+  {
+   "id": "f14530cc-bbf8-4398-8074-e7ea3413d063",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Mapear o fluxo atual com a Secretaria”.",
+   "quando": "2026-08-14T14:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-14T14:30:00.000Z"
+  },
+  {
+   "id": "b20ae175-01a1-474c-bcd3-ada808e72ff5",
+   "processoId": "d34a0ddf-b4e3-4ea6-9a7f-b53a547222cc",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Preparar o resumo impresso para a diretoria”.",
+   "quando": "2026-09-18T20:10:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-18T20:10:00.000Z"
+  },
+  {
+   "id": "b3a0a385-0bf2-4648-8f9f-c99c706bd59d",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Demanda identificada”.",
+   "quando": "2026-08-10T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-10T13:00:00.000Z"
+  },
+  {
+   "id": "f715ff47-718f-4abf-8600-26e30def8d66",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "tipo": "etapa",
+   "texto": "Moveu de “Demanda identificada” para “Mapeamento do cenário atual”.",
+   "quando": "2026-08-14T12:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-14T12:30:00.000Z"
+  },
+  {
+   "id": "70c5b6f2-34d0-4bed-b0f4-7a96f2dee8d2",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "tipo": "etapa",
+   "texto": "Moveu de “Mapeamento do cenário atual” para “Diagnóstico”.",
+   "quando": "2026-08-26T18:45:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-26T18:45:00.000Z"
+  },
+  {
+   "id": "f5e2b0a7-6623-438b-8a58-214f5c5711ac",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "tipo": "etapa",
+   "texto": "Moveu de “Diagnóstico” para “Proposta de melhoria”.",
+   "quando": "2026-09-24T11:20:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T11:20:00.000Z"
+  },
+  {
+   "id": "c897d2bd-eb48-4fd3-83f1-c80a6fd8ce1b",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "tipo": "reuniao",
+   "texto": "Reunião com a Ouvidoria: os assuntos que mais aparecem são financeiro, documentos e atendimento.",
+   "quando": "2026-08-20T13:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-08-20T13:30:00.000Z"
+  },
+  {
+   "id": "57b52451-36a9-4cbe-a2c7-4b5c3135353a",
+   "processoId": "e87f7fab-7224-49b4-8ee1-0acca761d0ea",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Levantar os assuntos mais reclamados dos últimos seis meses”.",
+   "quando": "2026-09-04T19:20:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-04T19:20:00.000Z"
+  },
+  {
+   "id": "50f6b540-3413-4e6b-b412-a99a2f9c87c1",
+   "processoId": "f7ca9a7a-7c85-4b98-adcc-263cf2cf3b6c",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Apresentação à diretoria”.",
+   "quando": "2026-09-24T11:40:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T11:40:00.000Z"
+  },
+  {
+   "id": "77d75648-0c75-4473-82a3-322480da832d",
+   "processoId": "f7ca9a7a-7c85-4b98-adcc-263cf2cf3b6c",
+   "tipo": "etapa",
+   "texto": "Moveu de “Apresentação à diretoria” para “Concluído”.",
+   "quando": "2026-09-24T13:05:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T13:05:00.000Z"
+  },
+  {
+   "id": "655d4df7-8e3e-46de-8363-4e44e794b1d3",
+   "processoId": "f7ca9a7a-7c85-4b98-adcc-263cf2cf3b6c",
+   "tipo": "situacao",
+   "texto": "Processo concluído em 24/09/2026.",
+   "quando": "2026-09-24T13:05:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T13:05:00.000Z"
+  },
+  {
+   "id": "8f59ad0a-6968-4142-bb26-7a34f7718be3",
+   "processoId": "f7ca9a7a-7c85-4b98-adcc-263cf2cf3b6c",
+   "tipo": "retorno-diretoria",
+   "texto": "Diretoria aprovou a publicação da regra única do jaleco.",
+   "quando": "2026-09-24T12:50:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-24T12:50:00.000Z"
+  },
+  {
+   "id": "0e2701b5-c14e-43ed-9515-2b7c031dfade",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Demanda identificada”.",
+   "quando": "2026-07-27T12:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-27T12:00:00.000Z"
+  },
+  {
+   "id": "b0aba5c2-6370-467b-bef8-ae002e356a95",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "etapa",
+   "texto": "Moveu de “Demanda identificada” para “Mapeamento do cenário atual”.",
+   "quando": "2026-08-03T13:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-03T13:30:00.000Z"
+  },
+  {
+   "id": "571d38b5-1f53-4f1c-84c3-3197d741b353",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "etapa",
+   "texto": "Moveu de “Mapeamento do cenário atual” para “Diagnóstico”.",
+   "quando": "2026-08-18T17:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-18T17:00:00.000Z"
+  },
+  {
+   "id": "6d81dcbc-bc4c-4318-a40d-57b6b09293de",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "etapa",
+   "texto": "Moveu de “Diagnóstico” para “Proposta de melhoria”.",
+   "quando": "2026-09-01T12:20:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-01T12:20:00.000Z"
+  },
+  {
+   "id": "66607b99-32eb-41da-b654-c7b1a601b8fb",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "etapa",
+   "texto": "Moveu de “Proposta de melhoria” para “Apresentação à diretoria”.",
+   "quando": "2026-09-24T11:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T11:30:00.000Z"
+  },
+  {
+   "id": "ebf455d1-8e7e-4bd5-8b05-90b16835f395",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "reuniao",
+   "texto": "Reunião com a Captação sobre como o aluno chega depois da matrícula.",
+   "quando": "2026-08-06T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-08-06T13:00:00.000Z"
+  },
+  {
+   "id": "5908f61c-2f60-4835-af7b-5554e9e2b360",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "decisao",
+   "texto": "A régua cobre os primeiros 90 dias; depois disso o acompanhamento volta para a coordenação.",
+   "quando": "2026-09-01T12:30:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-01T12:30:00.000Z"
+  },
+  {
+   "id": "4191b2a2-a4a4-44c9-bd9c-22748a22e1c0",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "nota",
+   "texto": "Apresentação à diretoria marcada. Resumo impresso pronto.",
+   "quando": "2026-09-24T13:40:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-24T13:40:00.000Z"
+  },
+  {
+   "id": "cb3ef454-609a-4416-8dd1-3dbadcc24068",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Levantar a evasão de calouros do último ano”.",
+   "quando": "2026-08-25T14:00:00.000Z",
+   "autor": {
+    "id": "06a8f7f7-b361-448a-8621-c03002264fb5",
+    "nome": "Isabela Freitas"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-25T14:00:00.000Z"
+  },
+  {
+   "id": "0a4964d5-c69b-4672-ad7e-10d017584b33",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Montar a régua de contato”.",
+   "quando": "2026-09-10T18:30:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-10T18:30:00.000Z"
+  },
+  {
+   "id": "ed9e31f5-8284-47df-885c-7e44b8bf91ba",
+   "processoId": "75c262fb-db60-4d0a-be91-96016b387417",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Preparar o resumo impresso para a diretoria”.",
+   "quando": "2026-09-23T20:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-23T20:00:00.000Z"
+  },
+  {
+   "id": "5ec4ee82-6151-4bc0-a447-8114a094b31e",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Demanda identificada”.",
+   "quando": "2026-08-11T12:00:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-11T12:00:00.000Z"
+  },
+  {
+   "id": "6f4a143a-78a6-4d27-b949-16b2f465a6bd",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "etapa",
+   "texto": "Moveu de “Demanda identificada” para “Diagnóstico”.",
+   "quando": "2026-08-25T13:15:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-25T13:15:00.000Z"
+  },
+  {
+   "id": "b6177b16-607a-4913-874a-56e2b84b5959",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "etapa",
+   "texto": "Moveu de “Diagnóstico” para “Proposta de melhoria”.",
+   "quando": "2026-09-08T17:30:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-08T17:30:00.000Z"
+  },
+  {
+   "id": "99c8ab3a-8650-449f-b4b9-fbade82f4bb1",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "etapa",
+   "texto": "Moveu de “Proposta de melhoria” para “Apresentação à diretoria”.",
+   "quando": "2026-09-17T12:00:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-17T12:00:00.000Z"
+  },
+  {
+   "id": "bb4c7618-e13d-4c49-9090-cf84eb8ffff0",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "etapa",
+   "texto": "Moveu de “Apresentação à diretoria” para “Encaminhado ao TI”.",
+   "quando": "2026-09-24T12:20:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T12:20:00.000Z"
+  },
+  {
+   "id": "ac7fa80a-11e0-40a2-9a29-45d116ad31c7",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "retorno-diretoria",
+   "texto": "Diretoria aprovou o piloto em dois cursos e pediu o primeiro resultado até o fim do semestre.",
+   "quando": "2026-09-23T18:00:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-23T18:00:00.000Z"
+  },
+  {
+   "id": "4723869c-3c51-4912-bf7d-2cca9edaea3a",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Levantar com o TI quais dados estão disponíveis”.",
+   "quando": "2026-09-02T19:00:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-02T19:00:00.000Z"
+  },
+  {
+   "id": "7a0748f6-da9a-4a5a-ab06-01015ead8909",
+   "processoId": "ce9d6a01-bb9c-4051-858f-68a0ef5143f4",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Definir os cursos do piloto”.",
+   "quando": "2026-09-15T13:45:00.000Z",
+   "autor": {
+    "id": "b25f3938-a2f3-4824-9eef-dc9bd865cca4",
+    "nome": "Bianca Lessa"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-15T13:45:00.000Z"
+  },
+  {
+   "id": "b6810095-77a3-4360-b9ef-945a19126f2a",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Demanda identificada”.",
+   "quando": "2026-07-20T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-20T13:00:00.000Z"
+  },
+  {
+   "id": "0acfb060-b6c9-4ca0-9e85-1486cdfb3c44",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "tipo": "etapa",
+   "texto": "Moveu de “Demanda identificada” para “Mapeamento do cenário atual”.",
+   "quando": "2026-07-28T17:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-28T17:00:00.000Z"
+  },
+  {
+   "id": "adfddade-a71a-4f89-b939-740503ab00b9",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "tipo": "etapa",
+   "texto": "Moveu de “Mapeamento do cenário atual” para “Diagnóstico”.",
+   "quando": "2026-09-24T11:35:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T11:35:00.000Z"
+  },
+  {
+   "id": "2dcb45a4-9de6-4cda-a08c-575f23bb066f",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "tipo": "reuniao",
+   "texto": "Conversa com a Secretaria sobre o volume de pedidos e os documentos exigidos.",
+   "quando": "2026-08-05T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-08-05T13:00:00.000Z"
+  },
+  {
+   "id": "bab1c576-5d06-4b5c-9707-1bf7cf1a1978",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "tipo": "nota",
+   "texto": "O prazo venceu porque a Secretaria estava no período de matrícula. Diagnóstico retomado.",
+   "quando": "2026-09-24T11:40:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-24T11:40:00.000Z"
+  },
+  {
+   "id": "251fecbb-51f6-4e38-a916-20602f2e6aaf",
+   "processoId": "5972356d-0152-4800-8334-0f4f993356f7",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Mapear o fluxo atual com a Secretaria”.",
+   "quando": "2026-08-06T18:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-06T18:00:00.000Z"
+  },
+  {
+   "id": "d31362b9-1aec-47d0-a5cf-bcc61da0e714",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Demanda identificada”.",
+   "quando": "2026-08-24T12:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-24T12:00:00.000Z"
+  },
+  {
+   "id": "6e60bd28-3935-4e71-bce4-048d83e0980c",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "etapa",
+   "texto": "Moveu de “Demanda identificada” para “Diagnóstico”.",
+   "quando": "2026-09-01T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-01T13:00:00.000Z"
+  },
+  {
+   "id": "f5b76756-4606-4891-899e-8b84d55d00d7",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "etapa",
+   "texto": "Moveu de “Diagnóstico” para “Proposta de melhoria”.",
+   "quando": "2026-09-08T12:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-08T12:30:00.000Z"
+  },
+  {
+   "id": "b50b95ba-8315-4671-9d66-a7aac896247b",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "etapa",
+   "texto": "Moveu de “Proposta de melhoria” para “Apresentação à diretoria”.",
+   "quando": "2026-09-16T17:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-16T17:00:00.000Z"
+  },
+  {
+   "id": "d1febbbb-5768-4e7f-b062-e665e32376f4",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "etapa",
+   "texto": "Moveu de “Apresentação à diretoria” para “Encaminhado ao TI”.",
+   "quando": "2026-09-24T11:50:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T11:50:00.000Z"
+  },
+  {
+   "id": "ed8161e3-f523-4c84-a57f-d88d511ec838",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "decisao",
+   "texto": "Sem pontuação: o sistema mostra só etapa, prazo e responsáveis.",
+   "quando": "2026-09-08T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-08T13:00:00.000Z"
+  },
+  {
+   "id": "60499ab1-50b4-4617-ab60-a800046fe40c",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "retorno-diretoria",
+   "texto": "Diretoria aprovou o protótipo e pediu a publicação no Funcionário Online.",
+   "quando": "2026-09-22T14:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-22T14:30:00.000Z"
+  },
+  {
+   "id": "51cb529d-49e4-46d1-96c5-503392525698",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Levantar o que cada pessoa acompanha hoje”.",
+   "quando": "2026-09-04T14:00:00.000Z",
+   "autor": {
+    "id": "db5f7603-f5ab-47ae-8a57-d3143ecc2a2d",
+    "nome": "Larissa Lopes"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-04T14:00:00.000Z"
+  },
+  {
+   "id": "fca7f2c0-8960-494e-a802-26b4572d33f9",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Validar o protótipo com a equipe”.",
+   "quando": "2026-09-12T19:00:00.000Z",
+   "autor": {
+    "id": "06a8f7f7-b361-448a-8621-c03002264fb5",
+    "nome": "Isabela Freitas"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-12T19:00:00.000Z"
+  },
+  {
+   "id": "400de6b7-f786-47e3-b80a-74cbf3224666",
+   "processoId": "0cbdcb81-ed9c-44c7-bc75-fc66314f1ab5",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Apresentar o protótipo à diretoria”.",
+   "quando": "2026-09-22T14:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-22T14:00:00.000Z"
+  },
+  {
+   "id": "fd36e7e3-4ae4-44d1-8fcb-616b92f3f51c",
+   "processoId": "42eba67b-ce0b-4e28-9193-a06a4dd36878",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Encaminhado ao TI”.",
+   "quando": "2026-09-24T12:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T12:00:00.000Z"
+  },
+  {
+   "id": "8b4a0b60-9e8c-473b-a830-09ed9173882b",
+   "processoId": "09770b2c-bca4-45a1-b14d-13f229dc4e11",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Diagnóstico”.",
+   "quando": "2026-09-24T13:20:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T13:20:00.000Z"
+  },
+  {
+   "id": "ddcb5c02-25ee-44f9-bdb4-5e2dd929a16a",
+   "processoId": "09770b2c-bca4-45a1-b14d-13f229dc4e11",
+   "tipo": "reuniao",
+   "texto": "Reunião com a Ouvidoria para receber o mapa do cenário atual.",
+   "quando": "2026-09-24T13:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-24T13:30:00.000Z"
+  },
+  {
+   "id": "89190eaa-ebea-495c-b27d-bd60cd095585",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "criacao",
+   "texto": "Processo criado na etapa “Demanda identificada”.",
+   "quando": "2026-06-15T12:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-06-15T12:00:00.000Z"
+  },
+  {
+   "id": "99e37706-c4a2-4e2d-ab4a-e170a1d0109a",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Demanda identificada” para “Mapeamento do cenário atual”.",
+   "quando": "2026-06-19T13:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-06-19T13:30:00.000Z"
+  },
+  {
+   "id": "e413d205-7af3-4a49-953f-25bfb4698983",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Mapeamento do cenário atual” para “Diagnóstico”.",
+   "quando": "2026-06-29T17:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-06-29T17:00:00.000Z"
+  },
+  {
+   "id": "bbe7bac8-c753-4e20-b5bb-4cdc856f63d0",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Diagnóstico” para “Proposta de melhoria”.",
+   "quando": "2026-07-08T12:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-08T12:30:00.000Z"
+  },
+  {
+   "id": "7bd54e20-0402-4945-9d0a-1ec60cbb25a6",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Proposta de melhoria” para “Apresentação à diretoria”.",
+   "quando": "2026-07-20T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-20T13:00:00.000Z"
+  },
+  {
+   "id": "ab879014-141c-4a98-9496-cbb5a4172206",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Apresentação à diretoria” para “Encaminhado ao TI”.",
+   "quando": "2026-07-23T18:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-23T18:00:00.000Z"
+  },
+  {
+   "id": "6a15bef5-d449-45d3-a285-fb7b84533e29",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Encaminhado ao TI” para “Em implantação”.",
+   "quando": "2026-08-04T12:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-04T12:00:00.000Z"
+  },
+  {
+   "id": "105ce3b0-ada7-4d87-802c-178f67f02dc9",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Em implantação” para “Em acompanhamento”.",
+   "quando": "2026-08-24T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-24T13:00:00.000Z"
+  },
+  {
+   "id": "a952ad4c-b8ac-4a77-9ce7-c30f12437d4a",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "etapa",
+   "texto": "Moveu de “Em acompanhamento” para “Concluído”.",
+   "quando": "2026-09-18T19:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-18T19:00:00.000Z"
+  },
+  {
+   "id": "28465923-54c2-49d4-8a9a-b2f30c362031",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "situacao",
+   "texto": "Processo concluído em 18/09/2026.",
+   "quando": "2026-09-18T19:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-18T19:00:00.000Z"
+  },
+  {
+   "id": "91046e8e-05dc-49d5-834b-96e28fbd9c6b",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "reuniao",
+   "texto": "Reunião com a Secretaria: as declarações de matrícula e de frequência são a maior parte dos pedidos.",
+   "quando": "2026-06-22T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-06-22T13:00:00.000Z"
+  },
+  {
+   "id": "8413f21e-e8c4-407b-825c-6cac5c0bf776",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "retorno-diretoria",
+   "texto": "Diretoria aprovou o autoatendimento e pediu que começasse antes do segundo semestre.",
+   "quando": "2026-07-22T14:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-07-22T14:00:00.000Z"
+  },
+  {
+   "id": "17c2b121-d478-4d7b-958f-cadbbc6408c9",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "retorno-ti",
+   "texto": "TI confirmou que o Lyceum gera as declarações com os dados do aluno. Publicação prevista para agosto.",
+   "quando": "2026-08-03T19:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-08-03T19:00:00.000Z"
+  },
+  {
+   "id": "e45cd45c-b0e5-4d09-9a35-11aba52550ea",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "decisao",
+   "texto": "Declarações com situação especial (trancamento, transferência) continuam no balcão.",
+   "quando": "2026-08-18T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-08-18T13:00:00.000Z"
+  },
+  {
+   "id": "e3be0572-ca41-481c-b5bf-1eca3973324e",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "nota",
+   "texto": "Um mês depois, os pedidos no balcão caíram de 420 para 65 por mês. Processo encerrado.",
+   "quando": "2026-09-18T18:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": false,
+   "criadoEm": "2026-09-18T18:30:00.000Z"
+  },
+  {
+   "id": "ca2e9a57-ed52-4f62-a363-b5b1991e3850",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Levantar os tipos de declaração mais pedidos”.",
+   "quando": "2026-06-24T14:00:00.000Z",
+   "autor": {
+    "id": "06a8f7f7-b361-448a-8621-c03002264fb5",
+    "nome": "Isabela Freitas"
+   },
+   "automatico": true,
+   "criadoEm": "2026-06-24T14:00:00.000Z"
+  },
+  {
+   "id": "2c8ecc01-c568-4d3d-ada6-d7e209d71c1a",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Mapear o fluxo atual com a Secretaria”.",
+   "quando": "2026-06-26T18:30:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-06-26T18:30:00.000Z"
+  },
+  {
+   "id": "151b844f-b7b6-4c40-8e50-7535a39cc31e",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Montar o fluxo de autoatendimento”.",
+   "quando": "2026-07-15T13:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-15T13:00:00.000Z"
+  },
+  {
+   "id": "688a4ae4-dc64-45d2-b9c9-652271045bc4",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Preparar o resumo impresso para a diretoria”.",
+   "quando": "2026-07-17T20:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-07-17T20:00:00.000Z"
+  },
+  {
+   "id": "db0e91cb-5e8a-4c3b-857c-508750f4a459",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Validar os modelos de declaração com a Secretaria”.",
+   "quando": "2026-08-12T17:00:00.000Z",
+   "autor": {
+    "id": "06a8f7f7-b361-448a-8621-c03002264fb5",
+    "nome": "Isabela Freitas"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-12T17:00:00.000Z"
+  },
+  {
+   "id": "18f1a560-edf0-4f3f-9929-eefb276bc028",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Divulgar o novo serviço aos alunos”.",
+   "quando": "2026-08-21T12:30:00.000Z",
+   "autor": {
+    "id": "06a8f7f7-b361-448a-8621-c03002264fb5",
+    "nome": "Isabela Freitas"
+   },
+   "automatico": true,
+   "criadoEm": "2026-08-21T12:30:00.000Z"
+  },
+  {
+   "id": "58f6a6a4-0ea3-4f4c-a92e-3b322d61d0ff",
+   "processoId": "e5fb347f-0aa9-49df-aaab-75b585ed0d3b",
+   "tipo": "tarefa-concluida",
+   "texto": "Concluiu a tarefa “Comparar os pedidos no balcão antes e depois”.",
+   "quando": "2026-09-17T19:00:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-17T19:00:00.000Z"
+  },
+  {
+   "id": "bc2e62d3-e628-4151-854f-ab2a404710f7",
+   "processoId": "09770b2c-bca4-45a1-b14d-13f229dc4e11",
+   "tipo": "anexo",
+   "texto": "Anexou “2026-07-13_Mapa Ouvidoria (1).pdf” em “Diagrama do cenário atual”.",
+   "quando": "2026-09-24T14:20:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "automatico": true,
+   "criadoEm": "2026-09-24T14:20:00.000Z"
+  }
+ ],
+ "anexos": [
+  {
+   "id": "5b57dec7-c77a-4062-bebc-4272d6aafaa6",
+   "processoId": "09770b2c-bca4-45a1-b14d-13f229dc4e11",
+   "nome": "2026-07-13_Mapa Ouvidoria (1).pdf",
+   "mime": "application/pdf",
+   "tamanho": 819455,
+   "contexto": "antes-diagrama",
+   "adicionadoEm": "2026-09-24T14:20:00.000Z",
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   }
+  }
+ ],
+ "demandas": [
+  {
+   "id": "0a3669c6-4ca2-456b-89e5-0bc8f75f4809",
+   "titulo": "Não Formação de Turma",
+   "descricao": "Alunos matriculados em turmas que não atingem o mínimo de inscritos são avisados perto do início das aulas e ficam sem uma alternativa clara de remanejamento ou devolução.",
+   "origemId": "7faa4ead-8901-480c-9f1e-df51bddbd1c9",
+   "setorId": "9f06f6e2-73b5-4c3e-a5fe-1bdee0598026",
+   "solicitante": "Captação",
+   "recebidaEm": "2026-09-24",
+   "status": "nova",
+   "motivoRecusa": "",
+   "processoId": null,
+   "registradaPor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "criadaEm": "2026-09-24T14:05:00.000Z",
+   "atualizadaEm": "2026-09-24T14:05:00.000Z"
+  },
+  {
+   "id": "7f700637-c7e0-4a3b-b211-80876b95707e",
+   "titulo": "Calculo de Dispensa",
+   "descricao": "O aluno com disciplinas cursadas em outra instituição não consegue saber quanto a dispensa reduz a mensalidade antes de fechar a matrícula.",
+   "origemId": null,
+   "setorId": null,
+   "solicitante": "",
+   "recebidaEm": "2026-09-24",
+   "status": "nova",
+   "motivoRecusa": "",
+   "processoId": null,
+   "registradaPor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "criadaEm": "2026-09-24T14:00:00.000Z",
+   "atualizadaEm": "2026-09-24T14:00:00.000Z"
+  }
+ ],
+ "notas": [
+  {
+   "id": "b6dbed7a-af59-4a34-a70a-353802cb2635",
+   "titulo": "Teste",
+   "texto": "TESTE",
+   "fixada": false,
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "criadaEm": "2026-09-24T14:42:00.000Z",
+   "atualizadaEm": "2026-09-24T14:42:00.000Z"
+  },
+  {
+   "id": "b0884b07-1677-4579-b07e-60e9b08dc009",
+   "titulo": "Reunião",
+   "texto": "",
+   "fixada": false,
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "criadaEm": "2026-09-24T14:41:00.000Z",
+   "atualizadaEm": "2026-09-24T14:41:00.000Z"
+  },
+  {
+   "id": "41a276fe-225b-4f74-983a-c5786806d25e",
+   "titulo": "hoje as 15",
+   "texto": "",
+   "fixada": false,
+   "autor": {
+    "id": "f366fe8f-2fa1-4285-94f2-51548c9875fc",
+    "nome": "Victor Capitani"
+   },
+   "criadaEm": "2026-09-24T13:45:00.000Z",
+   "atualizadaEm": "2026-09-24T13:45:00.000Z"
+  }
+ ],
+ "meta": {
+  "schemaVersion": 1,
+  "proximoNumero": 11,
+  "ultimoBackup": null,
+  "criadoEm": "2026-07-20T12:00:00.000Z"
+ }
+}

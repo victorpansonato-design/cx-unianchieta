@@ -36,7 +36,7 @@ function Tela({ rota }: { rota: Rota }) {
     case 'concluidos':
       return <ConcluidosPage query={rota.query} />;
     case 'processo':
-      return <ProcessoPage codigo={rota.codigo} aba={rota.aba} />;
+      return <ProcessoPage codigo={rota.codigo} aba={rota.aba} concluido={rota.concluido} />;
     case 'demandas':
       return <DemandasPage demandaId={rota.demandaId} />;
     case 'notas':
