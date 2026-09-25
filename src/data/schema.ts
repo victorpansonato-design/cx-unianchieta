@@ -25,6 +25,7 @@ import type {
   ItemLista,
   Membro,
   Meta,
+  MudancaPrazo,
   Nota,
   PassoFluxo,
   Processo,
@@ -32,17 +33,34 @@ import type {
   Situacao,
   Snapshot,
   StatusDemanda,
+  StatusTi,
   Tarefa,
   TipoAndamento,
+  TrabalhoTi,
 } from './types';
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 type Bruto = Record<string, unknown>;
 type Migracao = (dado: Bruto) => Bruto;
 
 /** MIGRACOES[n] leva o dado da versão n para n + 1. */
-const MIGRACOES: Record<number, Migracao> = {};
+const MIGRACOES: Record<number, Migracao> = {
+  /**
+   * 1 → 2: acesso do TI e histórico do prazo. A configuração ganha a equipe do
+   * TI (vazia) e cada processo, o lado do TI (na fila, sem ninguém) e o
+   * histórico do prazo (vazio: as mudanças antigas não foram registradas).
+   */
+  1: (dado) => ({
+    ...dado,
+    config: { ...obj(dado.config), equipeTi: arr(obj(dado.config).equipeTi) },
+    processos: arr(dado.processos).map((p) => ({
+      ...obj(p),
+      ti: obj(p).ti ?? { responsaveisIds: [], status: 'fila', previsao: null, link: '' },
+      historicoPrazos: arr(obj(p).historicoPrazos),
+    })),
+  }),
+};
 
 /* -- Leitores tolerantes --------------------------------------------------- */
 
@@ -119,6 +137,9 @@ function config(v: unknown): Config {
     membros: arr(o.membros)
       .map(membro)
       .filter((x): x is Membro => x !== null),
+    equipeTi: arr(o.equipeTi)
+      .map(membro)
+      .filter((x): x is Membro => x !== null),
     setores: itens(o.setores),
     origens: 'origens' in o ? itens(o.origens) : inicial.origens,
     prioridades: 'prioridades' in o ? itens(o.prioridades) : inicial.prioridades,
@@ -132,6 +153,27 @@ function autor(v: unknown): Autor {
 }
 
 const SITUACOES: readonly Situacao[] = ['andamento', 'pausado', 'cancelado', 'concluido'];
+const STATUS_TI: readonly StatusTi[] = ['fila', 'desenvolvimento', 'validar'];
+
+function trabalhoTi(v: unknown): TrabalhoTi {
+  const o = obj(v);
+  const responsaveisIds = arr(o.responsaveisIds).filter((x): x is string => typeof x === 'string');
+  const status = um(o.status, STATUS_TI, 'fila');
+  return {
+    responsaveisIds,
+    // Sem ninguém do TI, o processo está na fila — seja qual for o status gravado.
+    status: responsaveisIds.length === 0 ? 'fila' : status === 'fila' ? 'desenvolvimento' : status,
+    previsao: dataOuNull(o.previsao),
+    link: str(o.link),
+  };
+}
+
+function mudancaPrazo(v: unknown): MudancaPrazo | null {
+  const o = obj(v);
+  const em = str(o.em);
+  if (!em) return null;
+  return { de: dataOuNull(o.de), para: dataOuNull(o.para), em, motivo: str(o.motivo), autor: autor(o.autor) };
+}
 
 function passo(v: unknown): PassoFluxo {
   const o = obj(v);
@@ -181,6 +223,9 @@ function processo(v: unknown, etapaPadrao: string): Processo | null {
     tags: arr(o.tags).filter((t): t is string => typeof t === 'string' && t.trim().length > 0),
     abertura: dataOuNull(o.abertura) ?? hoje(),
     prazo: dataOuNull(o.prazo),
+    historicoPrazos: arr(o.historicoPrazos)
+      .map(mudancaPrazo)
+      .filter((x): x is MudancaPrazo => x !== null),
     conclusao: dataOuNull(o.conclusao),
     etapaId: str(o.etapaId) || etapaPadrao,
     historicoEtapas: arr(o.historicoEtapas)
@@ -201,6 +246,7 @@ function processo(v: unknown, etapaPadrao: string): Processo | null {
     },
     indicadores: arr(o.indicadores).map(indicador),
     lyceum: str(o.lyceum),
+    ti: trabalhoTi(o.ti),
     demandaId: strOuNull(o.demandaId),
     criadoEm,
     atualizadoEm: str(o.atualizadoEm) || criadoEm,
@@ -240,6 +286,8 @@ const TIPOS_ANDAMENTO: readonly TipoAndamento[] = [
   'responsavel',
   'anexo',
   'tarefa-concluida',
+  'prazo',
+  'ti',
 ];
 
 function andamento(v: unknown): Andamento | null {
@@ -260,7 +308,7 @@ function andamento(v: unknown): Andamento | null {
   };
 }
 
-const CONTEXTOS: readonly ContextoAnexo[] = ['antes-diagrama', 'antes-bpmn', 'depois', 'geral'];
+const CONTEXTOS: readonly ContextoAnexo[] = ['antes-diagrama', 'antes-bpmn', 'depois', 'geral', 'ti'];
 
 function anexo(v: unknown): Anexo | null {
   const o = obj(v);

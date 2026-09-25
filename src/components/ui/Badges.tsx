@@ -151,15 +151,47 @@ export function Avatar({
 
 /* -- TrendIndicator -------------------------------------------------------- */
 
-/** Subir não é automaticamente bom: é neutro. Só a queda ganha vermelho. */
-export function TrendIndicator({ direcao, children }: { direcao: 'up' | 'down' | 'flat'; children?: ReactNode }) {
+/**
+ * Subir não é automaticamente bom: é neutro. Só a piora ganha vermelho.
+ *
+ * `invertido` (acréscimo do projeto) é para o número em que MENOS é melhor,
+ * como o tempo médio até concluir: lá é a subida que ganha o vermelho, e a
+ * queda fica neutra. A seta continua dizendo a direção; só a tinta muda.
+ */
+export function TrendIndicator({
+  direcao,
+  invertido = false,
+  children,
+}: {
+  direcao: 'up' | 'down' | 'flat';
+  invertido?: boolean;
+  children?: ReactNode;
+}) {
   const Icone = direcao === 'up' ? ArrowUpRight : direcao === 'down' ? ArrowDownRight : Minus;
-  const cor = direcao === 'up' ? 'text-ink-2' : direcao === 'down' ? 'text-crit-ink' : 'text-ink-4';
+  const piorou = direcao === (invertido ? 'up' : 'down');
+  const cor = direcao === 'flat' ? 'text-ink-4' : piorou ? 'text-crit-ink' : 'text-ink-2';
   return (
     <span className={cn('inline-flex items-center gap-0.5 font-mono text-[11.5px] font-medium', cor)}>
       <Icone className="h-3 w-3" />
       {children}
     </span>
+  );
+}
+
+/* -- NewDot ---------------------------------------------------------------- */
+
+/**
+ * "Há algo novo aqui" (acréscimo do projeto): um ponto de 8px no canto de um
+ * botão de ícone, sem número. Um número no header viraria mais um contador
+ * para ler; o ponto só avisa que vale abrir. O anel na cor da superfície
+ * separa o ponto do ícone sem desenhar contorno, como na pilha de avatares.
+ */
+export function NewDot({ className }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn('pointer-events-none absolute h-2 w-2 rounded-full bg-brand-2 ring-2 ring-surface', className)}
+    />
   );
 }
 

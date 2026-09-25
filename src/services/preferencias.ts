@@ -64,3 +64,17 @@ export const prefsUI = criarPreferencia<PrefsUI>(STORAGE_KEYS.ui, PREFS_PADRAO, 
 export function atualizarPrefsUI(parcial: Partial<PrefsUI>) {
   prefsUI.definir({ ...prefsUI.get(), ...parcial });
 }
+
+/**
+ * Até que momento cada pessoa já viu as novidades, por chave de pessoa
+ * ("membro:id", "ti:id", "diretoria"). É do navegador, como o tema: cada um
+ * tem a própria última visita.
+ */
+export const novidadesVistas = criarPreferencia<Record<string, string>>(STORAGE_KEYS.novidades, {}, (v) => {
+  const o = v && typeof v === 'object' ? (v as Record<string, unknown>) : {};
+  return Object.fromEntries(Object.entries(o).filter((e): e is [string, string] => typeof e[1] === 'string'));
+});
+
+export function marcarNovidadesVistas(chave: string, momento: string) {
+  novidadesVistas.definir({ ...novidadesVistas.get(), [chave]: momento });
+}

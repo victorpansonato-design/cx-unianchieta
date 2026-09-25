@@ -4,22 +4,27 @@
  */
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
-import { Inbox } from 'lucide-react';
+import { ExternalLink, Inbox } from 'lucide-react';
 import { rotas } from '../../app/router';
 import { CampoDeTags } from '../../components/domain/CamposExtras';
-import { SeletorDePessoas } from '../../components/domain/Pessoas';
+import { PilhaDeAvatares, SeletorDePessoas } from '../../components/domain/Pessoas';
 import { NivelStatus, PrioridadeStatus, SituacaoStatus } from '../../components/domain/StatusProcesso';
+import { StatusTiBadge } from '../../components/domain/StatusTi';
 import { DateInput } from '../../components/ui/DateInput';
 import { InlineText, InlineTextArea } from '../../components/ui/Fields';
 import { SeletorInline } from '../../components/ui/SeletorInline';
 import { Card } from '../../components/ui/Surfaces';
 import type { ItemLista, Processo, Situacao, Snapshot } from '../../data/types';
 import { ativos } from '../../domain/config';
-import { ehEtapaFinal, estaVencido, SITUACOES } from '../../domain/processos';
+import { ehEtapaFinal, SITUACOES } from '../../domain/processos';
+import { estaComTi, nomesTi } from '../../domain/ti';
+import { cn } from '../../lib/cn';
 import { formatarData, formatarMomento } from '../../lib/dates';
+import { linkSeguro } from '../../lib/links';
 import { press } from '../../lib/motion';
 import { normalizar } from '../../lib/text';
 import { acoesProcesso } from '../../services/acoes';
+import { PrazoDoProcesso } from './PrazoDoProcesso';
 import { useMoverEtapa } from './useMoverEtapa';
 
 function Campo({ rotulo, children }: { rotulo: string; children: ReactNode }) {
@@ -36,6 +41,56 @@ function Bloco({ rotulo, children }: { rotulo: string; children: ReactNode }) {
     <div>
       <p className="mb-1 text-[12px] text-ink-3">{rotulo}</p>
       {children}
+    </div>
+  );
+}
+
+/**
+ * O lado do TI, só leitura para o CX: quem puxou, em que pé está, a previsão
+ * e o link da entrega. Quem mexe nisso é o TI, pela Fila do TI.
+ */
+function NoTi({ processo: p, s }: { processo: Processo; s: Snapshot }) {
+  const nomes = nomesTi(p, s.config);
+  const link = linkSeguro(p.ti.link);
+  return (
+    <div className="border-t border-hairline px-5 py-4">
+      <h3 className="mb-1 text-[12px] font-semibold text-ink-3">No TI</h3>
+      <dl className="space-y-0.5">
+        <Campo rotulo="Com">
+          {nomes.length ? (
+            <span className="flex min-w-0 items-center gap-2 py-1.5">
+              <PilhaDeAvatares nomes={nomes} />
+              <span className="truncate text-[13px] font-medium text-ink">{nomes.length === 1 ? nomes[0] : nomes.join(', ')}</span>
+            </span>
+          ) : (
+            <span className="block py-1.5 text-[13px] text-ink-4">Ninguém puxou ainda</span>
+          )}
+        </Campo>
+        <Campo rotulo="Status">
+          <span className="block py-1.5">
+            <StatusTiBadge status={p.ti.status} />
+          </span>
+        </Campo>
+        <Campo rotulo="Previsão">
+          <span className={cn('block py-1.5 text-[13px]', p.ti.previsao ? 'font-mono text-ink-2' : 'text-ink-4')}>
+            {p.ti.previsao ? formatarData(p.ti.previsao) : 'Sem previsão'}
+          </span>
+        </Campo>
+        {link && (
+          <Campo rotulo="Entrega">
+            <motion.a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileTap={press}
+              className="inline-flex max-w-full items-center gap-1.5 py-1.5 text-[13px] font-medium text-ink transition-colors hover:text-ink-2"
+            >
+              <ExternalLink className="h-3.5 w-3.5 shrink-0 text-ink-4" />
+              <span className="truncate">Abrir o link do TI</span>
+            </motion.a>
+          </Campo>
+        )}
+      </dl>
     </div>
   );
 }
@@ -101,14 +156,7 @@ export function PainelDeCampos({ processo: p, s }: { processo: Processo; s: Snap
           />
         </Campo>
         <Campo rotulo="Prazo">
-          <DateInput
-            variant="inline"
-            aria-label="Prazo previsto"
-            placeholder="Sem prazo"
-            value={p.prazo}
-            tone={estaVencido(p) ? 'crit' : undefined}
-            onChange={(v) => atualizar({ prazo: v })}
-          />
+          <PrazoDoProcesso processo={p} />
         </Campo>
         <Campo rotulo="Prioridade">
           <SeletorInline
@@ -149,6 +197,8 @@ export function PainelDeCampos({ processo: p, s }: { processo: Processo; s: Snap
           />
         </Campo>
       </dl>
+
+      {(estaComTi(s, p) || p.ti.responsaveisIds.length > 0) && <NoTi processo={p} s={s} />}
 
       <div className="space-y-4 border-t border-hairline px-5 py-4">
         <Bloco rotulo="Envolvidos de outros setores">

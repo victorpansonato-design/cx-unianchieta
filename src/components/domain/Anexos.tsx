@@ -203,11 +203,14 @@ export function LinhaDeAnexo({
   onVer,
   mostrarContexto = true,
   acaoExtra,
+  podeRemover = true,
 }: {
   anexo: Anexo;
   onVer: (a: Anexo) => void;
   mostrarContexto?: boolean;
   acaoExtra?: ReactNode;
+  /** O TI vê os arquivos do CX, mas não os apaga. */
+  podeRemover?: boolean;
 }) {
   const confirmar = useConfirm();
   const toast = useToast();
@@ -258,7 +261,9 @@ export function LinhaDeAnexo({
           <Button variant="ghost" size="xs" square aria-label={`Ver ${anexo.nome}`} icon={<Eye className="h-3.5 w-3.5" />} onClick={() => onVer(anexo)} />
         )}
         <Button variant="ghost" size="xs" square aria-label={`Baixar ${anexo.nome}`} icon={<Download className="h-3.5 w-3.5" />} onClick={baixar} />
-        <Button variant="ghost" size="xs" square aria-label={`Remover ${anexo.nome}`} icon={<Trash2 className="h-3.5 w-3.5" />} onClick={remover} />
+        {podeRemover && (
+          <Button variant="ghost" size="xs" square aria-label={`Remover ${anexo.nome}`} icon={<Trash2 className="h-3.5 w-3.5" />} onClick={remover} />
+        )}
       </div>
     </div>
   );

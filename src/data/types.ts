@@ -48,6 +48,12 @@ export interface Config {
   /** Em ordem. A última etapa encerra o processo. */
   etapas: Etapa[];
   membros: Membro[];
+  /**
+   * Pessoas do TI. Cada uma se cadastra ao entrar ("Sou do TI") e só vê a
+   * Fila do TI. Ficam separadas da equipe CX: não são responsáveis de
+   * processo nem de tarefa.
+   */
+  equipeTi: Membro[];
   setores: ItemLista[];
   origens: ItemLista[];
   /** Do menor para o maior. O mais alto aparece destacado. */
@@ -56,7 +62,7 @@ export interface Config {
   impactos: ItemLista[];
 }
 
-export type ListaConfig = 'membros' | 'setores' | 'origens' | 'prioridades' | 'impactos';
+export type ListaConfig = 'membros' | 'equipeTi' | 'setores' | 'origens' | 'prioridades' | 'impactos';
 
 /* -- Processo -------------------------------------------------------------- */
 
@@ -74,6 +80,37 @@ export interface PassoFluxo {
   nome: string;
   responsavel: string;
   sistema: string;
+}
+
+/**
+ * Uma mudança do prazo previsto. Guardada no processo (e não só no texto do
+ * andamento) para dar para contar quantas vezes o prazo foi adiado.
+ */
+export interface MudancaPrazo {
+  de: DateOnly | null;
+  para: DateOnly | null;
+  em: ISODateTime;
+  motivo: string;
+  autor: Autor;
+}
+
+/**
+ * Onde o processo está do lado do TI. É paralelo à etapa do CX: o TI nunca
+ * muda a etapa, só este status.
+ * - fila: ninguém do TI puxou o processo ainda;
+ * - desenvolvimento: alguém do TI está com ele;
+ * - validar: o TI entregou e espera o CX conferir.
+ */
+export type StatusTi = 'fila' | 'desenvolvimento' | 'validar';
+
+export interface TrabalhoTi {
+  /** Pessoas do TI que puxaram o processo (config.equipeTi). */
+  responsaveisIds: ID[];
+  status: StatusTi;
+  /** Previsão de entrega informada pelo TI. */
+  previsao: DateOnly | null;
+  /** Link do protótipo ou da entrega. */
+  link: string;
 }
 
 /** Métrica definida pela própria equipe. Nunca pré-preenchida. */
@@ -103,6 +140,8 @@ export interface Processo {
 
   abertura: DateOnly;
   prazo: DateOnly | null;
+  /** Toda mudança do prazo depois de definido, da mais antiga para a mais recente. */
+  historicoPrazos: MudancaPrazo[];
   conclusao: DateOnly | null;
 
   etapaId: ID;
@@ -131,6 +170,9 @@ export interface Processo {
 
   /** Módulo ou rotina do Lyceum envolvida. Só registro, sem integração. */
   lyceum: string;
+
+  /** O lado do TI: quem puxou, em que pé está, previsão e link da entrega. */
+  ti: TrabalhoTi;
 
   /** Demanda da caixa de entrada que originou o processo, se houver. */
   demandaId: ID | null;
@@ -168,11 +210,13 @@ export type TipoAndamentoAuto =
   | 'situacao'
   | 'responsavel'
   | 'anexo'
-  | 'tarefa-concluida';
+  | 'tarefa-concluida'
+  | 'prazo'
+  | 'ti';
 export type TipoAndamento = TipoAndamentoManual | TipoAndamentoAuto;
 
 export interface Autor {
-  /** ID do membro, ou 'diretoria'. */
+  /** ID do membro da equipe CX ou do TI, ou 'diretoria'. */
   id: ID;
   /** Nome no momento do registro — sobrevive à remoção do membro. */
   nome: string;
@@ -193,7 +237,7 @@ export interface Andamento {
 /* -- Anexo ----------------------------------------------------------------- */
 
 /** Onde o arquivo foi anexado. Todos aparecem também na aba Anexos. */
-export type ContextoAnexo = 'antes-diagrama' | 'antes-bpmn' | 'depois' | 'geral';
+export type ContextoAnexo = 'antes-diagrama' | 'antes-bpmn' | 'depois' | 'geral' | 'ti';
 
 /** Metadados do anexo. O conteúdo (Blob) vive no armazenamento de arquivos. */
 export interface Anexo {
@@ -269,6 +313,9 @@ export type Colecao = keyof Snapshot;
 
 /* -- Identidade (preferência do navegador) --------------------------------- */
 
-export type Identidade = { tipo: 'membro'; membroId: ID } | { tipo: 'diretoria' };
+export type Identidade =
+  | { tipo: 'membro'; membroId: ID }
+  | { tipo: 'ti'; membroId: ID }
+  | { tipo: 'diretoria' };
 
 export const AUTOR_DIRETORIA: Autor = { id: 'diretoria', nome: 'Diretoria' };

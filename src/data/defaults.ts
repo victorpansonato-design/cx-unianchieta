@@ -77,6 +77,7 @@ export function criarConfigInicial(): Config {
   return {
     etapas: ETAPAS.map((e) => ({ id: uid(), ...e, tarefasPadrao: [] })),
     membros: [],
+    equipeTi: [],
     setores: [],
     origens: itens(ORIGENS),
     prioridades: itens(PRIORIDADES),

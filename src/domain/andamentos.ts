@@ -3,7 +3,8 @@
  *
  * Manuais são o que a equipe registra (nota, reunião, decisão, retornos).
  * Automáticos nascem das próprias ações — criar, mudar de etapa, de situação,
- * de responsáveis, anexar, concluir tarefa — e não se editam.
+ * de responsáveis, de prazo, anexar, concluir tarefa, o que o TI faz — e não
+ * se editam.
  */
 import { agoraISO } from '../lib/dates';
 import { uid } from '../lib/ids';
@@ -29,6 +30,8 @@ export const NOME_TIPO: Record<TipoAndamento, string> = {
   responsavel: 'Responsáveis',
   anexo: 'Anexo',
   'tarefa-concluida': 'Tarefa concluída',
+  prazo: 'Prazo',
+  ti: 'TI',
 };
 
 export function andamentoAutomatico(

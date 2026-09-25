@@ -17,6 +17,7 @@ const falha = <T>(motivo: string): Resultado<T> => ({ ok: false, motivo });
 /** Textos por lista, para mensagens de validação. */
 export const NOMES_LISTA: Record<ListaConfig, { artigo: string; singular: string }> = {
   membros: { artigo: 'uma', singular: 'pessoa' },
+  equipeTi: { artigo: 'uma', singular: 'pessoa do TI' },
   setores: { artigo: 'um', singular: 'setor' },
   origens: { artigo: 'uma', singular: 'origem' },
   prioridades: { artigo: 'um', singular: 'nível de prioridade' },
@@ -39,8 +40,14 @@ export function nomeDe(lista: ItemLista[], id: ID | null | undefined): string | 
   return lista.find((x) => x.id === id)?.nome ?? null;
 }
 
+/** Listas de pessoas: têm função, além do nome. */
+export function ehListaDePessoas(lista: ListaConfig): lista is 'membros' | 'equipeTi' {
+  return lista === 'membros' || lista === 'equipeTi';
+}
+
 /** Quantos processos usam este item (para membros, também as tarefas atribuídas). */
 export function contarUso(s: Snapshot, lista: ListaConfig, id: ID): number {
+  if (lista === 'equipeTi') return s.processos.filter((p) => p.ti.responsaveisIds.includes(id)).length;
   if (lista === 'membros') {
     const processos = s.processos.filter((p) => p.responsaveisIds.includes(id)).length;
     const tarefas = s.tarefas.filter((t) => t.responsavelId === id).length;
@@ -51,7 +58,7 @@ export function contarUso(s: Snapshot, lista: ListaConfig, id: ID): number {
     origens: 'origemId',
     prioridades: 'prioridadeId',
     impactos: 'impactoId',
-  } as const satisfies Record<Exclude<ListaConfig, 'membros'>, keyof Snapshot['processos'][number]>;
+  } as const satisfies Record<Exclude<ListaConfig, 'membros' | 'equipeTi'>, keyof Snapshot['processos'][number]>;
   const emProcessos = s.processos.filter((p) => p[campo[lista]] === id).length;
   const emDemandas =
     lista === 'setores' || lista === 'origens'
@@ -170,7 +177,7 @@ export function adicionarItem(
   if (nomeRepetido(config[lista], nome)) return falha(`Já existe ${artigo} ${singular} com esse nome.`);
   const id = uid();
   const item: ItemLista | Membro =
-    lista === 'membros' ? { id, nome, funcao: (dados.funcao ?? '').trim() } : { id, nome };
+    ehListaDePessoas(lista) ? { id, nome, funcao: (dados.funcao ?? '').trim() } : { id, nome };
   return ok({ config: { ...config, [lista]: [...config[lista], item] }, id });
 }
 
@@ -188,7 +195,7 @@ export function atualizarItem(
     if (nomeRepetido(config[lista], nome, id)) return falha(`Já existe ${artigo} ${singular} com esse nome.`);
     mudanca.nome = nome;
   }
-  if (parcial.funcao !== undefined && lista === 'membros') mudanca.funcao = parcial.funcao.trim();
+  if (parcial.funcao !== undefined && ehListaDePessoas(lista)) mudanca.funcao = parcial.funcao.trim();
   return ok({
     ...config,
     [lista]: (config[lista] as ItemLista[]).map((x) => (x.id === id ? { ...x, ...mudanca } : x)),

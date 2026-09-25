@@ -1,6 +1,7 @@
 /**
  * Relatório geral para a diretoria: todos os processos ativos, por etapa, com
- * responsável, prazo e há quanto tempo estão parados — e os concluídos no ano.
+ * responsável, prazo (e quantas vezes foi adiado), quem do TI está com eles e
+ * há quanto tempo estão parados — e os concluídos no ano.
  * Folha A4 deitada, pronta para imprimir ou salvar em PDF.
  */
 import { PaginaDeImpressao, SecaoDaFolha } from '../../app/Impressao';
@@ -9,7 +10,8 @@ import { PrazoStatus, SituacaoStatus } from '../../components/domain/StatusProce
 import { AccentRule, Metric } from '../../components/ui/Surfaces';
 import { nomeDe } from '../../domain/config';
 import { resumoPainel } from '../../domain/painel';
-import { diasNaEtapa, estaAtivo, nomesResponsaveis } from '../../domain/processos';
+import { diasNaEtapa, estaAtivo, nomesResponsaveis, vezesAdiado } from '../../domain/processos';
+import { estaComTi, nomeStatusTi, nomesTi } from '../../domain/ti';
 import { ordenarProcessos } from '../../domain/filtros';
 import { useIdentidade } from '../../hooks/usePreferencias';
 import { useSnapshot } from '../../hooks/useStore';
@@ -87,11 +89,20 @@ export function RelatorioGeral() {
                   {g.processos.map((p) => (
                     <tr key={p.id} className="break-inside-avoid align-top">
                       <td className="py-1.5 font-mono text-ink-3">{p.codigo}</td>
-                      <td className="py-1.5 pr-3 font-medium text-ink">{p.titulo}</td>
+                      <td className="py-1.5 pr-3">
+                        <p className="font-medium text-ink">{p.titulo}</p>
+                        {estaComTi(s, p) && (
+                          <p className="text-ink-3">
+                            TI: {nomesTi(p, s.config).join(', ') || 'na fila'} · {nomeStatusTi(p.ti.status).toLowerCase()}
+                            {p.ti.previsao && ` · previsão ${formatarData(p.ti.previsao)}`}
+                          </p>
+                        )}
+                      </td>
                       <td className="py-1.5 pr-3 text-ink-2">{nomeDe(s.config.setores, p.setorId) ?? '—'}</td>
                       <td className="py-1.5 pr-3 text-ink-2">{nomesResponsaveis(p, s.config).join(', ') || '—'}</td>
                       <td className="py-1.5">
                         <PrazoStatus processo={p} />
+                        {vezesAdiado(p) > 0 && <p className="text-ink-4">adiado {plural(vezesAdiado(p), 'vez', 'vezes')}</p>}
                       </td>
                       <td className="py-1.5 font-mono text-ink-3">{plural(diasNaEtapa(p) ?? 0, 'dia', 'dias')}</td>
                       <td className="py-1.5">

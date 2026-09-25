@@ -13,7 +13,7 @@ tabelas quando houver um banco compartilhado.
 | `Anexo` | metadados de um arquivo; o conteúdo fica no armazenamento de arquivos | `processoId` |
 | `Demanda` | o que chegou ao CX e ainda não virou processo (caixa de demandas) | `processoId` quando aceita |
 | `Nota` | ata ou anotação da equipe que não pertence a um processo | — |
-| `Config` | etapas, equipe, setores, origens, níveis de prioridade e impacto | — |
+| `Config` | etapas, equipe CX, equipe do TI, setores, origens, níveis de prioridade e impacto | — |
 | `Meta` | versão do schema, próximo número do código, último backup | — |
 
 ### Processo
@@ -29,13 +29,25 @@ tabelas quando houver um banco compartilhado.
 | `abertura`, `prazo`, `conclusao` | `AAAA-MM-DD` | datas sem hora, no fuso local |
 | `etapaId` | id | etapa atual |
 | `historicoEtapas` | `{ etapaId, entrada }[]` | data e hora de entrada em cada etapa, gravada automaticamente |
+| `historicoPrazos` | `{ de, para, em, motivo, autor }[]` | cada mudança do prazo depois de criado o processo, com o motivo quando alguém escreve um. É o que conta quantas vezes o prazo foi adiado |
 | `situacao` | `andamento` · `pausado` · `cancelado` · `concluido` | paralela à etapa |
 | `problema` | `{ descricao, dores, efeitoAluno }` | |
 | `antes` | `{ observacoes }` | o diagrama e o BPMN são anexos com contexto `antes-diagrama` / `antes-bpmn` |
 | `depois` | `{ passos[], prototipoUrl, observacoes }` | cada passo: `{ nome, responsavel, sistema }` |
 | `indicadores` | `{ nome, antes, depois, fonte }[]` | definidos pela equipe; nunca pré-preenchidos |
 | `lyceum` | texto | módulo ou rotina do Lyceum envolvida (só registro) |
+| `ti` | `{ responsaveisIds, status, previsao, link }` | o lado do TI; ver abaixo |
 | `demandaId` | id ou nulo | a demanda da caixa de entrada que originou o processo |
+
+### Lado do TI (`processo.ti`)
+
+- O processo aparece na Fila do TI enquanto está ativo numa etapa com sinal `ti`.
+- `responsaveisIds`: pessoas da `config.equipeTi` que puxaram o processo.
+- `status`: `fila` (ninguém do TI está com ele) → `desenvolvimento` → `validar` (o TI entregou e espera
+  o CX conferir). `fila` não se escolhe: é o estado sem ninguém. O TI **nunca** muda a etapa.
+- Voltar para uma etapa do TI depois de `validar` põe o status de novo em `desenvolvimento` (ou `fila`).
+- `previsao` (`AAAA-MM-DD`) e `link` são informados pelo TI. Os arquivos da entrega são anexos com
+  contexto `ti`.
 
 ### Tarefa
 
@@ -55,7 +67,8 @@ tabelas quando houver um banco compartilhado.
 
 - `tipo`:
   - manuais: `nota`, `reuniao`, `decisao`, `retorno-diretoria`, `retorno-ti`;
-  - automáticos: `criacao`, `etapa`, `situacao`, `responsavel`, `anexo`, `tarefa-concluida`.
+  - automáticos: `criacao`, `etapa`, `situacao`, `responsavel`, `anexo`, `tarefa-concluida`, `prazo`,
+    `ti` (puxar, devolver, mudar o status ou a previsão do TI).
 - `quando`: o momento em que aconteceu. Nos manuais é editável, porque a reunião pode ter sido ontem.
 - `autor`: `{ id, nome }` gravado no momento do registro. Sobrevive à remoção do membro.
 
@@ -85,11 +98,18 @@ A etapa tem `{ id, nome, descricao, sinal, tarefasPadrao }`:
 | localStorage | `cx.v1.theme` | `"light"` ou `"dark"` (JSON) |
 | localStorage | `cx.v1.identidade` | quem está usando este navegador |
 | localStorage | `cx.v1.ui` | sidebar recolhida, lista ou quadro |
+| localStorage | `cx.v1.novidades` | até quando cada pessoa já viu as novidades neste navegador |
 | IndexedDB `cx-anexos` | store `arquivos`, chave = id do anexo | o arquivo (Blob) |
 
-O `v1` é a versão do schema. Se ela subir:
-- a chave do tema no `index.html` sobe junto;
-- a migração entra em `src/data/schema.ts`, em `MIGRACOES`.
+O `v1` é o prefixo do armazenamento, não a versão do schema. A versão do schema fica em
+`meta.schemaVersion` (hoje **2**) e sobe sem trocar o prefixo: a migração em `src/data/schema.ts`
+(`MIGRACOES`) converte o dado antigo ao abrir e ao importar um backup. Só troque o prefixo se o
+próprio armazenamento mudar de forma, e aí a chave do tema no `index.html` sobe junto.
+
+| Versão | O que mudou |
+|---|---|
+| 1 | primeira versão |
+| 2 | acesso do TI (`config.equipeTi`, `processo.ti`, anexo `ti`) e histórico do prazo (`processo.historicoPrazos`) |
 
 ## Arquivo de backup
 
@@ -98,7 +118,7 @@ O `v1` é a versão do schema. Se ela subir:
 ```json
 {
   "formato": "cx-unianchieta-backup",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "exportadoEm": "2026-09-23T13:22:00.000Z",
   "exportadoPor": "Nome de quem exportou",
   "dados": { "config": {}, "processos": [], "tarefas": [], "andamentos": [], "anexos": [], "demandas": [], "notas": [], "meta": {} },
@@ -115,13 +135,17 @@ navegador. Isso sempre pede confirmação.
 config_etapas     (id, ordem, nome, descricao, sinal)
 config_tarefas_padrao (etapa_id, ordem, titulo)
 config_membros    (id, nome, funcao, arquivado)
+config_equipe_ti  (id, nome, funcao, arquivado)
 config_setores    (id, nome, arquivado)            -- idem origens, prioridades (com ordem), impactos (com ordem)
 processos         (id, codigo UNIQUE, titulo, setor_id, envolvidos, origem_id,
                    prioridade_id, impacto_id, tags[], abertura, prazo, conclusao, etapa_id,
                    situacao, problema_descricao, problema_dores, problema_efeito_aluno,
                    antes_observacoes, depois_prototipo_url, depois_observacoes, lyceum,
+                   ti_status, ti_previsao, ti_link,
                    demanda_id, criado_em, atualizado_em)
 processo_responsaveis (processo_id, membro_id)
+processo_responsaveis_ti (processo_id, membro_ti_id)
+processo_prazos   (processo_id, de, para, em, motivo, autor_id, autor_nome)  -- historicoPrazos
 processo_etapas   (processo_id, etapa_id, entrada)          -- historicoEtapas
 fluxo_passos      (id, processo_id, ordem, nome, responsavel, sistema)
 indicadores       (id, processo_id, nome, antes, depois, fonte)

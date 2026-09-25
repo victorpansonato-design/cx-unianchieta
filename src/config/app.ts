@@ -1,9 +1,11 @@
 /**
  * Identidade do sistema e chaves de armazenamento — um lugar só.
  *
- * STORAGE_PREFIX carrega a versão do schema. Se ela subir (cx.v2), a chave do
- * tema no script de pré-pintura do index.html sobe junto — uma chave defasada
- * faz o app piscar a paleta errada no primeiro render (DESIGN_SYSTEM §9).
+ * STORAGE_PREFIX é o prefixo do armazenamento. A versão do schema mora em
+ * meta.schemaVersion e sobe sem trocar o prefixo (a migração converte o dado).
+ * Se o prefixo algum dia mudar (cx.v2), a chave do tema no script de
+ * pré-pintura do index.html sobe junto — uma chave defasada faz o app piscar a
+ * paleta errada no primeiro render (DESIGN_SYSTEM §9).
  */
 
 export const APP_NAME = 'Customer Experience';
@@ -24,6 +26,8 @@ export const STORAGE_KEYS = {
   identidade: `${STORAGE_PREFIX}.identidade`,
   /** Preferências de interface: sidebar recolhida, lista ou quadro. */
   ui: `${STORAGE_PREFIX}.ui`,
+  /** Até quando cada pessoa já viu as novidades, neste navegador. */
+  novidades: `${STORAGE_PREFIX}.novidades`,
 } as const;
 
 /** Banco IndexedDB onde vivem os arquivos anexados (PDFs, imagens, documentos). */

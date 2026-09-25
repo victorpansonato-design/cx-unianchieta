@@ -20,15 +20,27 @@ function Secao({ secao }: { secao: SecaoConfig }) {
       return <EtapasSecao />;
     case 'equipe':
       return (
-        <ListaEditavel
-          lista="membros"
-          textos={{
-            titulo: 'Equipe CX',
-            subtitulo: 'As pessoas que aparecem como responsáveis pelos processos e como autoras dos registros.',
-            vazio: 'Cadastre as pessoas da equipe CX para escolher responsáveis nos processos.',
-            placeholderNome: 'Nome',
-          }}
-        />
+        <div className="space-y-4">
+          <ListaEditavel
+            lista="membros"
+            textos={{
+              titulo: 'Equipe CX',
+              subtitulo: 'As pessoas que aparecem como responsáveis pelos processos e como autoras dos registros.',
+              vazio: 'Cadastre as pessoas da equipe CX para escolher responsáveis nos processos.',
+              placeholderNome: 'Nome',
+            }}
+          />
+          <ListaEditavel
+            lista="equipeTi"
+            textos={{
+              titulo: 'Equipe do TI',
+              subtitulo:
+                'Quem entra como TI vê só a Fila do TI: puxa os processos encaminhados, anexa a entrega e responde ao CX. Cada pessoa também pode se cadastrar sozinha ao abrir o sistema.',
+              vazio: 'Ninguém do TI cadastrado ainda. Quem é do TI pode se cadastrar ao abrir o sistema, em “Sou do TI”.',
+              placeholderNome: 'Nome',
+            }}
+          />
+        </div>
       );
     case 'setores':
       return (
@@ -91,7 +103,7 @@ export function ConfiguracoesPage({ secao }: { secao: SecaoConfig }) {
 
   const abas: TabItem<SecaoConfig>[] = [
     { id: 'etapas', label: 'Etapas', count: config.etapas.length },
-    { id: 'equipe', label: 'Equipe', count: ativos(config.membros).length },
+    { id: 'equipe', label: 'Equipes', count: ativos(config.membros).length + ativos(config.equipeTi).length },
     { id: 'setores', label: 'Setores', count: ativos(config.setores).length },
     { id: 'origens', label: 'Origens', count: ativos(config.origens).length },
     { id: 'niveis', label: 'Prioridade e impacto' },

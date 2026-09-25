@@ -13,6 +13,7 @@ export const NOME_CONTEXTO: Record<ContextoAnexo, string> = {
   'antes-bpmn': 'BPMN do cenário atual',
   depois: 'Cenário proposto',
   geral: 'Geral',
+  ti: 'Entrega do TI',
 };
 
 /** Rótulo curto para a tag na lista de anexos. */
@@ -21,6 +22,7 @@ export const TAG_CONTEXTO: Record<ContextoAnexo, string> = {
   'antes-bpmn': 'Antes · BPMN',
   depois: 'Depois',
   geral: 'Geral',
+  ti: 'TI',
 };
 
 export function novoAnexo(

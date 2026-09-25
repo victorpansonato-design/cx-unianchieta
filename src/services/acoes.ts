@@ -16,6 +16,7 @@ import {
   type Nota,
   type Processo,
   type Situacao,
+  type StatusTi,
   type TipoAndamentoManual,
 } from '../data';
 import type { Op } from '../data/ops';
@@ -27,6 +28,7 @@ import * as regrasDemanda from '../domain/demandas';
 import * as regrasNota from '../domain/notas';
 import * as regrasProcesso from '../domain/processos';
 import * as regrasTarefa from '../domain/tarefas';
+import * as regrasTi from '../domain/ti';
 import { uid } from '../lib/ids';
 import { autorAtual } from './identidade';
 
@@ -121,6 +123,11 @@ export const acoesProcesso = {
     return aplicar(regrasProcesso.atualizarProcesso(snapshot(), id, mudanca, autor()));
   },
 
+  /** Muda o prazo. O motivo (opcional) fica no histórico do prazo e no andamento. */
+  mudarPrazo(id: ID, prazo: string | null, motivo = '') {
+    return aplicar(regrasProcesso.atualizarProcesso(snapshot(), id, { prazo }, autor(), motivo));
+  },
+
   /**
    * Edita a partir do processo MAIS RECENTE, lido na hora de gravar. Campos que
    * salvam sozinhos (passos do fluxo, indicadores, problema) usam isto para
@@ -148,6 +155,31 @@ export const acoesProcesso = {
     const { ops, anexoIds } = regrasProcesso.removerProcesso(snapshot(), id);
     await aplicar(ops);
     await Promise.all(anexoIds.map((a) => store.arquivos.remover(a).catch(() => undefined)));
+  },
+};
+
+/* -- TI -------------------------------------------------------------------- */
+
+/** Ações de quem é do TI. A pessoa é sempre a identidade atual. */
+export const acoesTi = {
+  puxar(processoId: ID, pessoaTiId: ID) {
+    return aplicar(regrasTi.puxar(snapshot(), processoId, pessoaTiId, autor()));
+  },
+
+  soltar(processoId: ID, pessoaTiId: ID) {
+    return aplicar(regrasTi.soltar(snapshot(), processoId, pessoaTiId, autor()));
+  },
+
+  definirStatus(processoId: ID, status: Exclude<StatusTi, 'fila'>) {
+    return aplicar(regrasTi.definirStatus(snapshot(), processoId, status, autor()));
+  },
+
+  definirPrevisao(processoId: ID, previsao: string | null) {
+    return aplicar(regrasTi.definirPrevisao(snapshot(), processoId, previsao, autor()));
+  },
+
+  definirLink(processoId: ID, link: string) {
+    return aplicar(regrasTi.definirLink(snapshot(), processoId, link));
   },
 };
 

@@ -13,7 +13,7 @@ import { useConfirm } from '../../components/ui/Overlay';
 import { Card, CardHeader, EmptyState } from '../../components/ui/Surfaces';
 import { useToast } from '../../components/ui/Toast';
 import type { ItemLista, ListaConfig, Membro } from '../../data/types';
-import { arquivados, ativos, contarUso, ehNivelMaisAlto, grauDoNivel } from '../../domain/config';
+import { arquivados, ativos, contarUso, ehListaDePessoas, ehNivelMaisAlto, grauDoNivel } from '../../domain/config';
 import { useIdentidade } from '../../hooks/usePreferencias';
 import { useSnapshot } from '../../hooks/useStore';
 import { cn } from '../../lib/cn';
@@ -63,7 +63,7 @@ export function ListaEditavel({
   const todos = snapshot.config[lista] as ItemLista[];
   const itens = useMemo(() => ativos(todos), [todos]);
   const removidos = useMemo(() => arquivados(todos), [todos]);
-  const ehEquipe = lista === 'membros';
+  const ehEquipe = ehListaDePessoas(lista);
 
   const adicionar = (e: FormEvent) => {
     e.preventDefault();
@@ -88,7 +88,8 @@ export function ListaEditavel({
 
   const remover = async (item: ItemLista) => {
     const usos = contarUso(snapshot, lista, item.id);
-    const souEu = ehEquipe && pessoa?.tipo === 'membro' && pessoa.id === item.id;
+    const souEu =
+      ehEquipe && pessoa?.tipo === (lista === 'equipeTi' ? 'ti' : 'membro') && pessoa.id === item.id;
     const detalhes = [
       usos > 0
         ? `Está em uso em ${plural(usos, 'registro', 'registros')}. Sai das listas de escolha, mas o nome continua aparecendo onde já foi usado.`

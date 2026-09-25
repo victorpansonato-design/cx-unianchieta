@@ -9,6 +9,7 @@
 import { useMemo, useSyncExternalStore } from 'react';
 
 export type AbaProcesso = 'visao-geral' | 'antes-e-depois' | 'tarefas' | 'andamentos' | 'anexos';
+export type AbaTi = 'fila' | 'entregues';
 export type SecaoConfig =
   | 'etapas'
   | 'equipe'
@@ -24,8 +25,14 @@ export type Rota =
   | { nome: 'demandas'; demandaId: string | null }
   | { nome: 'notas'; notaId: string | null }
   | { nome: 'relatorio' }
+  /** Relatório dos concluídos de um período (#/relatorio/concluidos?periodo=mes). */
+  | { nome: 'relatorio-concluidos'; query: URLSearchParams }
   | { nome: 'processos'; query: URLSearchParams }
   | { nome: 'concluidos'; query: URLSearchParams }
+  /** Fila do TI (#/ti) e os já entregues (#/ti/entregues). */
+  | { nome: 'ti'; aba: AbaTi }
+  /** Um processo visto pelo TI (#/ti/processo/CX-003). */
+  | { nome: 'ti-processo'; codigo: string }
   /** `concluido`: aberto de dentro de Concluídos (#/concluidos/CX-003). */
   | { nome: 'processo'; codigo: string; aba: AbaProcesso; concluido: boolean }
   | { nome: 'comparacao'; codigo: string }
@@ -60,7 +67,16 @@ export function lerRota(hash: string): Rota {
   if (partes[0] === 'meu-trabalho') return { nome: 'meu-trabalho' };
   if (partes[0] === 'demandas') return { nome: 'demandas', demandaId: partes[1] ?? null };
   if (partes[0] === 'notas') return { nome: 'notas', notaId: partes[1] ?? null };
-  if (partes[0] === 'relatorio') return { nome: 'relatorio' };
+  if (partes[0] === 'relatorio') {
+    if (partes[1] === 'concluidos') return { nome: 'relatorio-concluidos', query: new URLSearchParams(busca) };
+    return { nome: 'relatorio' };
+  }
+  if (partes[0] === 'ti') {
+    if (partes.length === 1) return { nome: 'ti', aba: 'fila' };
+    if (partes[1] === 'entregues' && partes.length === 2) return { nome: 'ti', aba: 'entregues' };
+    if (partes[1] === 'processo' && partes[2]) return { nome: 'ti-processo', codigo: partes[2] };
+    return { nome: 'nao-encontrada' };
+  }
   if (partes[0] === 'concluidos') {
     if (partes.length === 1) return { nome: 'concluidos', query: new URLSearchParams(busca) };
     const aba = (partes[2] ?? 'visao-geral') as AbaProcesso;
@@ -100,6 +116,9 @@ export const rotas = {
   demandas: (id?: string) => (id ? `#/demandas/${encodeURIComponent(id)}` : '#/demandas'),
   notas: (id?: string) => (id ? `#/notas/${encodeURIComponent(id)}` : '#/notas'),
   relatorio: () => '#/relatorio',
+  relatorioConcluidos: (filtros?: Record<string, string | undefined>) => comQuery('#/relatorio/concluidos', filtros),
+  ti: (aba: AbaTi = 'fila') => (aba === 'fila' ? '#/ti' : '#/ti/entregues'),
+  tiProcesso: (codigo: string) => `#/ti/processo/${encodeURIComponent(codigo)}`,
   processos: (filtros?: Record<string, string | undefined>) => comQuery('#/processos', filtros),
   concluidos: (filtros?: Record<string, string | undefined>) => comQuery('#/concluidos', filtros),
   processo: (codigo: string, aba: AbaProcesso = 'visao-geral') =>
@@ -154,6 +173,7 @@ export function chaveDaTela(rota: Rota): string {
       return `processo:${rota.codigo}`;
     case 'comparacao':
     case 'resumo':
+    case 'ti-processo':
       return `${rota.nome}:${rota.codigo}`;
     // Abrir uma demanda ou nota abre um painel lateral: a página por trás não muda.
     case 'demandas':

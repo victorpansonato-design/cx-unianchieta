@@ -6,13 +6,18 @@
  *   andam juntas, nos dois sentidos.
  * - Toda mudança de etapa grava a data de entrada (historicoEtapas), gera um
  *   andamento automático e acrescenta as tarefas padrão da etapa nova.
+ * - Toda mudança de prazo entra no histórico do prazo (com o motivo, quando a
+ *   pessoa escreve um) e gera um andamento. É isso que mostra à diretoria
+ *   quantas vezes um prazo foi adiado.
+ * - Um processo que volta para uma etapa do TI depois de entregue volta a
+ *   "Em desenvolvimento": o TI tem trabalho de novo.
  * - Funções puras: recebem o snapshot, devolvem as Ops. Quem aplica é a store.
  */
 import { CODE_PREFIX } from '../config/app';
 import { agoraISO, diasEntre, formatarData, hoje, paraDateOnly } from '../lib/dates';
 import { uid } from '../lib/ids';
 import type { Op } from '../data/ops';
-import type { Autor, Config, Etapa, ID, Processo, Situacao, Snapshot } from '../data/types';
+import type { Autor, Config, DateOnly, Etapa, ID, MudancaPrazo, Processo, Situacao, Snapshot } from '../data/types';
 import { andamentoAutomatico } from './andamentos';
 import { tarefasPadraoPara } from './tarefas';
 
@@ -49,6 +54,34 @@ export function diasDeAtraso(p: Processo, referencia: string = hoje()): number {
 
 export function contarVencidos(processos: Processo[], referencia: string = hoje()): number {
   return processos.filter((p) => estaVencido(p, referencia)).length;
+}
+
+/** Texto do andamento de uma mudança de prazo. */
+export function textoMudancaPrazo(de: DateOnly | null, para: DateOnly | null): string {
+  if (!de && para) return `Prazo definido para ${formatarData(para)}.`;
+  if (de && !para) return `Prazo removido. Era ${formatarData(de)}.`;
+  if (de && para && para > de) return `Prazo adiado de ${formatarData(de)} para ${formatarData(para)}.`;
+  return `Prazo antecipado de ${formatarData(de)} para ${formatarData(para)}.`;
+}
+
+/** Mudança que empurrou para mais tarde um prazo que já existia. */
+export function ehAdiamento(m: MudancaPrazo): boolean {
+  return m.de !== null && m.para !== null && m.para > m.de;
+}
+
+/** Quantas vezes o prazo foi adiado. */
+export function vezesAdiado(p: Processo): number {
+  return p.historicoPrazos.filter(ehAdiamento).length;
+}
+
+/** A mudança de prazo no histórico do processo e o andamento que a conta. */
+function mudarPrazo(p: Processo, para: DateOnly | null, motivo: string, autor: Autor, agora: string, sufixo = '') {
+  const mudanca: MudancaPrazo = { de: p.prazo, para, em: agora, motivo: motivo.trim(), autor };
+  const texto = `${textoMudancaPrazo(p.prazo, para)}${sufixo}${mudanca.motivo ? ` Motivo: ${mudanca.motivo}` : ''}`;
+  return {
+    historicoPrazos: [...p.historicoPrazos, mudanca],
+    andamento: andamentoAutomatico(p.id, 'prazo', texto, autor, agora),
+  };
 }
 
 /** Última entrada em cada etapa (voltar a uma etapa atualiza a data). */
@@ -151,6 +184,7 @@ export function criarProcesso(
     tags: [],
     abertura: hoje(),
     prazo: dados.prazo ?? null,
+    historicoPrazos: [],
     conclusao: final ? hoje() : null,
     etapaId: etapa.id,
     historicoEtapas: [{ etapaId: etapa.id, entrada: agora }],
@@ -160,6 +194,7 @@ export function criarProcesso(
     depois: { passos: [], prototipoUrl: '', observacoes: '' },
     indicadores: [],
     lyceum: '',
+    ti: { responsaveisIds: [], status: 'fila', previsao: null, link: '' },
     demandaId: dados.demandaId ?? null,
     criadoEm: agora,
     atualizadoEm: agora,
@@ -230,6 +265,22 @@ export function moverParaEtapa(s: Snapshot, processoId: ID, etapaId: ID, autor: 
     });
   }
 
+  // Voltou para o TI depois de entregue (ajustes): o TI tem trabalho de novo.
+  if (destino.sinal === 'ti' && origem?.sinal !== 'ti' && p.ti.status === 'validar') {
+    const status = p.ti.responsaveisIds.length ? 'desenvolvimento' : 'fila';
+    atualizado.ti = { ...p.ti, status };
+    ops.push({
+      tipo: 'andamento',
+      valor: andamentoAutomatico(
+        p.id,
+        'ti',
+        status === 'fila' ? 'Voltou para a fila do TI.' : 'Voltou para o TI: status “Em desenvolvimento”.',
+        autor,
+        agora,
+      ),
+    });
+  }
+
   ops.unshift({ tipo: 'processo', valor: atualizado });
   for (const t of tarefasPadraoPara(s, p.id, destino, agora)) ops.push({ tipo: 'tarefa', valor: t });
   return ops;
@@ -264,14 +315,21 @@ export function reabrirProcesso(
   if (!p || !destino || p.situacao !== 'concluido' || ehEtapaFinal(s.config, dados.etapaId)) return [];
 
   const motivo = dados.motivo.trim();
-  return moverParaEtapa(s, processoId, dados.etapaId, autor).map((op): Op => {
-    if (op.tipo === 'processo' && dados.prazo) return { ...op, valor: { ...op.valor, prazo: dados.prazo } };
+  const novoPrazo = dados.prazo && dados.prazo !== p.prazo ? dados.prazo : null;
+  const extras: Op[] = [];
+  const ops = moverParaEtapa(s, processoId, dados.etapaId, autor).map((op): Op => {
+    if (op.tipo === 'processo' && novoPrazo) {
+      const m = mudarPrazo(p, novoPrazo, '', autor, op.valor.atualizadoEm, ' Na reabertura do processo.');
+      extras.push({ tipo: 'andamento', valor: m.andamento });
+      return { ...op, valor: { ...op.valor, prazo: novoPrazo, historicoPrazos: m.historicoPrazos } };
+    }
     if (op.tipo === 'andamento' && op.valor.tipo === 'situacao') {
       const texto = `Processo reaberto para ajustes, de volta a “${destino.nome}”.${motivo ? ` Motivo: ${motivo}` : ''}`;
       return { ...op, valor: { ...op.valor, texto } };
     }
     return op;
   });
+  return [...ops, ...extras];
 }
 
 /* -- Situação -------------------------------------------------------------- */
@@ -304,17 +362,37 @@ export function definirSituacao(s: Snapshot, processoId: ID, situacao: Situacao,
 
 /* -- Editar campos --------------------------------------------------------- */
 
+/** O que a tela muda direto. Etapa, situação, os históricos e o lado do TI têm regras próprias. */
 export type MudancaProcesso = Partial<
-  Omit<Processo, 'id' | 'codigo' | 'etapaId' | 'situacao' | 'historicoEtapas' | 'criadoEm' | 'atualizadoEm'>
+  Omit<
+    Processo,
+    'id' | 'codigo' | 'etapaId' | 'situacao' | 'historicoEtapas' | 'historicoPrazos' | 'ti' | 'criadoEm' | 'atualizadoEm'
+  >
 >;
 
-export function atualizarProcesso(s: Snapshot, processoId: ID, mudanca: MudancaProcesso, autor: Autor): Op[] {
+/**
+ * Edita campos do processo. Mudar o prazo entra no histórico do prazo e gera
+ * um andamento; `motivoPrazo` vai junto quando a pessoa explicou a mudança.
+ */
+export function atualizarProcesso(
+  s: Snapshot,
+  processoId: ID,
+  mudanca: MudancaProcesso,
+  autor: Autor,
+  motivoPrazo = '',
+): Op[] {
   const p = s.processos.find((x) => x.id === processoId);
   if (!p) return [];
   const agora = agoraISO();
   const atualizado: Processo = { ...p, ...mudanca, atualizadoEm: agora };
   if (mudanca.titulo !== undefined && !mudanca.titulo.trim()) atualizado.titulo = p.titulo;
   const ops: Op[] = [{ tipo: 'processo', valor: atualizado }];
+
+  if (mudanca.prazo !== undefined && mudanca.prazo !== p.prazo) {
+    const m = mudarPrazo(p, mudanca.prazo, motivoPrazo, autor, agora);
+    atualizado.historicoPrazos = m.historicoPrazos;
+    ops.push({ tipo: 'andamento', valor: m.andamento });
+  }
 
   if (mudanca.responsaveisIds) {
     const antes = new Set(p.responsaveisIds);

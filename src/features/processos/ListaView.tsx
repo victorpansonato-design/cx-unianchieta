@@ -6,11 +6,13 @@
 import { rotas } from '../../app/router';
 import { DiasNaEtapa, PrazoStatus, PrioridadeStatus, SituacaoStatus } from '../../components/domain/StatusProcesso';
 import { PilhaDeAvatares } from '../../components/domain/Pessoas';
+import { LinhaTi } from '../../components/domain/StatusTi';
 import { Tag } from '../../components/ui/Badges';
 import { Card, ChevronAffordance, Row } from '../../components/ui/Surfaces';
 import type { Processo, Snapshot } from '../../data/types';
 import { nomeDe } from '../../domain/config';
 import { diasNaEtapa, estaVencido, etapaDe, nomesResponsaveis } from '../../domain/processos';
+import { estaComTi } from '../../domain/ti';
 
 const GRADE = 'lg:grid lg:grid-cols-[minmax(0,1fr)_200px_96px_150px_120px_16px] lg:items-center lg:gap-4';
 
@@ -50,7 +52,7 @@ export function ListaView({ processos, s }: { processos: Processo[]; s: Snapshot
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-[12px] font-medium text-ink-2">{etapa?.nome ?? '—'}</p>
-                    <DiasNaEtapa dias={diasNaEtapa(p)} curto />
+                    {estaComTi(s, p) ? <LinhaTi processo={p} config={s.config} /> : <DiasNaEtapa dias={diasNaEtapa(p)} curto />}
                   </div>
                   <div>
                     {p.responsaveisIds.length ? (

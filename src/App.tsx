@@ -7,7 +7,7 @@ import { AlertTriangle } from 'lucide-react';
 import { IdentityGate } from './app/IdentityGate';
 import { NaoEncontrada } from './app/NaoEncontrada';
 import { Shell } from './app/Shell';
-import { useRota, type Rota } from './app/router';
+import { navegar, rotas, useRota, type Rota } from './app/router';
 import { Card, EmptyState, Skeleton } from './components/ui/Surfaces';
 import { ConfirmProvider } from './components/ui/Overlay';
 import { ToastProvider, useToast } from './components/ui/Toast';
@@ -22,8 +22,13 @@ import { ProcessoPage } from './features/processo/ProcessoPage';
 import { ResumoImpressao } from './features/processo/ResumoImpressao';
 import { ConcluidosPage } from './features/processos/ConcluidosPage';
 import { ProcessosPage } from './features/processos/ProcessosPage';
+import { RelatorioConcluidos } from './features/relatorio/RelatorioConcluidos';
 import { RelatorioGeral } from './features/relatorio/RelatorioGeral';
+import { FilaTiPage } from './features/ti/FilaTiPage';
+import { ProcessoTiPage } from './features/ti/ProcessoTiPage';
+import { useIdentidade } from './hooks/usePreferencias';
 import { useStore } from './hooks/useStore';
+import type { Pessoa } from './services/identidade';
 
 function Tela({ rota }: { rota: Rota }) {
   switch (rota.nome) {
@@ -43,9 +48,14 @@ function Tela({ rota }: { rota: Rota }) {
       return <NotasPage notaId={rota.notaId} />;
     case 'configuracoes':
       return <ConfiguracoesPage secao={rota.secao} />;
+    case 'ti':
+      return <FilaTiPage aba={rota.aba} />;
+    case 'ti-processo':
+      return <ProcessoTiPage codigo={rota.codigo} />;
     case 'comparacao':
     case 'resumo':
     case 'relatorio':
+    case 'relatorio-concluidos':
     case 'nao-encontrada':
       return <NaoEncontrada />;
   }
@@ -56,10 +66,25 @@ function TelaSemShell({ rota }: { rota: Rota }) {
   if (rota.nome === 'comparacao') return <ComparacaoPage codigo={rota.codigo} />;
   if (rota.nome === 'resumo') return <ResumoImpressao codigo={rota.codigo} />;
   if (rota.nome === 'relatorio') return <RelatorioGeral />;
+  if (rota.nome === 'relatorio-concluidos') return <RelatorioConcluidos query={rota.query} />;
   return null;
 }
 
-const SEM_SHELL: ReadonlyArray<Rota['nome']> = ['comparacao', 'resumo', 'relatorio'];
+const SEM_SHELL: ReadonlyArray<Rota['nome']> = ['comparacao', 'resumo', 'relatorio', 'relatorio-concluidos'];
+
+const ROTAS_DO_TI: ReadonlyArray<Rota['nome']> = ['ti', 'ti-processo'];
+
+/**
+ * Quem é do TI só vê a Fila do TI; quem não é, não vê a tela do TI. Um link
+ * de processo compartilhado leva cada um à sua versão do mesmo processo.
+ */
+function redirecionamento(rota: Rota, tipo: Pessoa['tipo'] | null): string | null {
+  if (!tipo || rota.nome === 'nao-encontrada') return null;
+  const naTelaDoTi = ROTAS_DO_TI.includes(rota.nome);
+  if (tipo === 'ti' && !naTelaDoTi) return rota.nome === 'processo' ? rotas.tiProcesso(rota.codigo) : rotas.ti();
+  if (tipo !== 'ti' && naTelaDoTi) return rota.nome === 'ti-processo' ? rotas.processo(rota.codigo) : rotas.painel();
+  return null;
+}
 
 /** Uma gravação que falhar vira um aviso — nunca some em silêncio. */
 function AvisoDeFalhas() {
@@ -102,6 +127,12 @@ export default function App() {
   const carga = useStore((e) => e.carga);
   const erroCarga = useStore((e) => e.erroCarga);
   const rota = useRota();
+  const { pessoa } = useIdentidade();
+  const destino = carga === 'pronto' ? redirecionamento(rota, pessoa?.tipo ?? null) : null;
+
+  useEffect(() => {
+    if (destino) navegar(destino, { substituir: true });
+  }, [destino]);
 
   if (carga === 'carregando') return <Carregando />;
   if (carga === 'falhou') return <FalhaAoAbrir mensagem={erroCarga ?? 'Erro desconhecido.'} />;
@@ -111,11 +142,9 @@ export default function App() {
       <ConfirmProvider>
         <AvisoDeFalhas />
         {SEM_SHELL.includes(rota.nome) ? (
-          <TelaSemShell rota={rota} />
+          !destino && <TelaSemShell rota={rota} />
         ) : (
-          <Shell rota={rota}>
-            <Tela rota={rota} />
-          </Shell>
+          <Shell rota={rota}>{!destino && <Tela rota={rota} />}</Shell>
         )}
         <IdentityGate />
       </ConfirmProvider>

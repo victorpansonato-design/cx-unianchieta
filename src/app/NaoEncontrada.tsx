@@ -1,6 +1,7 @@
 import { Compass } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card, EmptyState } from '../components/ui/Surfaces';
+import { useIdentidade } from '../hooks/usePreferencias';
 import { navegar, rotas } from './router';
 
 export function NaoEncontrada({
@@ -10,6 +11,8 @@ export function NaoEncontrada({
   titulo?: string;
   mensagem?: string;
 }) {
+  // Quem é do TI não tem painel: volta para a fila.
+  const doTi = useIdentidade().pessoa?.tipo === 'ti';
   return (
     <Card padded={false}>
       <EmptyState
@@ -17,8 +20,8 @@ export function NaoEncontrada({
         title={titulo}
         message={mensagem}
         action={
-          <Button size="sm" onClick={() => navegar(rotas.painel())}>
-            Voltar ao painel
+          <Button size="sm" onClick={() => navegar(doTi ? rotas.ti() : rotas.painel())}>
+            {doTi ? 'Voltar à fila do TI' : 'Voltar ao painel'}
           </Button>
         }
       />

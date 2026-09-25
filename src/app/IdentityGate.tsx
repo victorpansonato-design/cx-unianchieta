@@ -3,16 +3,18 @@
  *
  * Abre sozinho na primeira visita (e sempre que a pessoa salva deixou de
  * existir na equipe). Enquanto ninguém for escolhido, não fecha: todo registro
- * precisa de um autor. Pelo menu do header, abre para trocar de pessoa.
+ * precisa de um autor. Pelo nome no pé da barra lateral, abre para trocar.
  *
- * Se a equipe ainda estiver vazia, a própria pessoa se cadastra aqui mesmo —
- * ninguém precisa descobrir sozinho onde fica Configurações.
+ * Três grupos: a equipe CX, a diretoria e o TI. Quem não está na lista se
+ * cadastra aqui mesmo, escolhendo se é do CX ou do TI — ninguém precisa
+ * descobrir sozinho onde fica Configurações. Quem entra como TI vê só a Fila
+ * do TI.
  */
 import { useState, useSyncExternalStore, type FormEvent } from 'react';
 import { Plus, UserRound } from 'lucide-react';
 import { Avatar, Tag } from '../components/ui/Badges';
 import { Button, LinkButton } from '../components/ui/Button';
-import { Field, TextInput } from '../components/ui/Fields';
+import { Field, Segmented, TextInput } from '../components/ui/Fields';
 import { Modal } from '../components/ui/Overlay';
 import { Row } from '../components/ui/Surfaces';
 import { useToast } from '../components/ui/Toast';
@@ -23,7 +25,7 @@ import { acoesConfig } from '../services/acoes';
 import { identidade, type Pessoa } from '../services/identidade';
 import type { Identidade } from '../data/types';
 
-/* Pedido de troca vindo do header ou da busca rápida. */
+/* Pedido de troca vindo da barra lateral ou da busca rápida. */
 let trocando = false;
 const ouvintes = new Set<() => void>();
 const seletor = {
@@ -46,7 +48,50 @@ export function abrirSeletorDeIdentidade() {
 
 function mesmaPessoa(i: Identidade, p: Pessoa | null) {
   if (!p) return false;
-  return i.tipo === 'diretoria' ? p.tipo === 'diretoria' : p.tipo === 'membro' && p.id === i.membroId;
+  if (i.tipo === 'diretoria') return p.tipo === 'diretoria';
+  return p.tipo === i.tipo && p.id === i.membroId;
+}
+
+type Equipe = 'membros' | 'equipeTi';
+
+interface Opcao {
+  chave: string;
+  id: Identidade;
+  nome: string;
+  detalhe: string;
+}
+
+function Grupo({
+  titulo,
+  opcoes,
+  pessoa,
+  onEscolher,
+}: {
+  titulo: string;
+  opcoes: Opcao[];
+  pessoa: Pessoa | null;
+  onEscolher: (o: Opcao) => void;
+}) {
+  if (opcoes.length === 0) return null;
+  return (
+    <div>
+      <p className="px-5 pt-3 pb-1 text-[12px] font-semibold text-ink-3">{titulo}</p>
+      <div className="divide-y divide-hairline">
+        {opcoes.map((o) => (
+          <Row key={o.chave} onClick={() => onEscolher(o)} className="group">
+            <div className="flex items-center gap-3 px-5 py-2.5">
+              <Avatar nome={o.nome} size="sm" />
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[13px] font-medium text-ink">{o.nome}</p>
+                <p className="truncate text-[12px] text-ink-3">{o.detalhe}</p>
+              </div>
+              {mesmaPessoa(o.id, pessoa) && <Tag>Você</Tag>}
+            </div>
+          </Row>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export function IdentityGate() {
@@ -56,14 +101,16 @@ export function IdentityGate() {
   const toast = useToast();
 
   const [formAberto, setFormAberto] = useState(false);
+  const [equipe, setEquipe] = useState<Equipe>('membros');
   const [nome, setNome] = useState('');
   const [funcao, setFuncao] = useState('');
   const [erro, setErro] = useState<string | null>(null);
 
   const membros = ativos(config.membros);
-  const equipeVazia = membros.length === 0;
+  const pessoasTi = ativos(config.equipeTi);
+  const ninguemCadastrado = membros.length === 0 && pessoasTi.length === 0;
   const aberto = precisaEscolher || pedidoDeTroca;
-  const mostrarForm = equipeVazia || formAberto;
+  const mostrarForm = ninguemCadastrado || formAberto;
 
   const fechar = () => {
     seletor.definir(false);
@@ -79,7 +126,7 @@ export function IdentityGate() {
 
   const cadastrar = (e: FormEvent) => {
     e.preventDefault();
-    const r = acoesConfig.adicionarItem('membros', { nome, funcao });
+    const r = acoesConfig.adicionarItem(equipe, { nome, funcao });
     if (!r.ok) {
       setErro(r.motivo);
       return;
@@ -87,18 +134,28 @@ export function IdentityGate() {
     const nomeLimpo = nome.trim();
     setNome('');
     setFuncao('');
-    escolher({ tipo: 'membro', membroId: r.valor }, nomeLimpo);
+    escolher(equipe === 'equipeTi' ? { tipo: 'ti', membroId: r.valor } : { tipo: 'membro', membroId: r.valor }, nomeLimpo);
   };
 
-  const opcoes: Array<{ chave: string; id: Identidade; nome: string; detalhe: string | null }> = [
-    ...membros.map((m) => ({
-      chave: m.id,
-      id: { tipo: 'membro' as const, membroId: m.id },
-      nome: m.nome,
-      detalhe: m.funcao || 'Equipe CX',
-    })),
-    { chave: 'diretoria', id: { tipo: 'diretoria' }, nome: 'Diretoria', detalhe: 'Acompanha os processos' },
-  ];
+  const opcoesCx: Opcao[] = membros.map((m) => ({
+    chave: m.id,
+    id: { tipo: 'membro', membroId: m.id },
+    nome: m.nome,
+    detalhe: m.funcao || 'Equipe CX',
+  }));
+  const opcoesTi: Opcao[] = pessoasTi.map((m) => ({
+    chave: `ti-${m.id}`,
+    id: { tipo: 'ti', membroId: m.id },
+    nome: m.nome,
+    detalhe: m.funcao || 'Equipe do TI',
+  }));
+  const opcaoDiretoria: Opcao = {
+    chave: 'diretoria',
+    id: { tipo: 'diretoria' },
+    nome: 'Diretoria',
+    detalhe: 'Acompanha os processos',
+  };
+  const aoEscolher = (o: Opcao) => escolher(o.id, o.nome);
 
   return (
     <Modal
@@ -108,31 +165,42 @@ export function IdentityGate() {
       size="sm"
       icon={<UserRound className="h-4 w-4" />}
       title="Quem está usando?"
-      description="Seu nome fica registrado nos andamentos e nas alterações. Dá para trocar depois, no canto superior direito."
+      description="Seu nome fica registrado nos andamentos e nas alterações. Dá para trocar depois, clicando no seu nome no pé da barra lateral."
     >
-      <div className="divide-y divide-hairline">
-        {opcoes.map((o) => (
-          <Row key={o.chave} onClick={() => escolher(o.id, o.nome)} className="group">
-            <div className="flex items-center gap-3 px-5 py-3">
-              <Avatar nome={o.nome} size="sm" />
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[13px] font-medium text-ink">{o.nome}</p>
-                {o.detalhe && <p className="truncate text-[12px] text-ink-3">{o.detalhe}</p>}
-              </div>
-              {mesmaPessoa(o.id, pessoa) && <Tag>Você</Tag>}
-            </div>
-          </Row>
-        ))}
+      <div className="pb-2">
+        <Grupo titulo="Equipe CX" opcoes={opcoesCx} pessoa={pessoa} onEscolher={aoEscolher} />
+        <Grupo titulo="Diretoria" opcoes={[opcaoDiretoria]} pessoa={pessoa} onEscolher={aoEscolher} />
+        <Grupo titulo="TI" opcoes={opcoesTi} pessoa={pessoa} onEscolher={aoEscolher} />
       </div>
 
       <div className="border-t border-hairline px-5 py-4">
         {mostrarForm ? (
           <form onSubmit={cadastrar} className="space-y-3">
-            <p className="text-[12px] leading-relaxed text-ink-3">
-              {equipeVazia
-                ? 'A equipe CX ainda não foi cadastrada. Adicione seu nome para começar; os colegas fazem o mesmo quando abrirem o sistema.'
-                : 'Adicione seu nome à equipe CX.'}
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="text-[12px] leading-relaxed text-ink-3">
+                {ninguemCadastrado ? 'Ninguém foi cadastrado ainda. Adicione seu nome para começar.' : 'Adicione seu nome.'}
+              </p>
+              <Segmented<Equipe>
+                size="xs"
+                layoutId="identidade-equipe"
+                label="Equipe"
+                value={equipe}
+                onChange={(v) => {
+                  setEquipe(v);
+                  setErro(null);
+                }}
+                items={[
+                  { value: 'membros', label: 'Sou do CX' },
+                  { value: 'equipeTi', label: 'Sou do TI' },
+                ]}
+              />
+            </div>
+            {equipe === 'equipeTi' && (
+              <p className="text-[11.5px] leading-relaxed text-ink-4">
+                Quem entra pelo TI vê só a Fila do TI: os processos que o CX encaminhou, para puxar, anexar a entrega e
+                responder.
+              </p>
+            )}
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Nome" required error={erro}>
                 {(id) => (
@@ -140,7 +208,7 @@ export function IdentityGate() {
                     id={id}
                     value={nome}
                     autoComplete="name"
-                    data-autofocus={equipeVazia || undefined}
+                    data-autofocus={ninguemCadastrado || undefined}
                     onChange={(e) => {
                       setNome(e.target.value);
                       setErro(null);
@@ -153,7 +221,7 @@ export function IdentityGate() {
               </Field>
             </div>
             <div className="flex justify-end">
-              <Button type="submit" variant={equipeVazia ? 'primary' : 'secondary'} size="sm" disabled={!nome.trim()}>
+              <Button type="submit" variant={ninguemCadastrado ? 'primary' : 'secondary'} size="sm" disabled={!nome.trim()}>
                 Adicionar e entrar
               </Button>
             </div>

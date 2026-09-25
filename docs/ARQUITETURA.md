@@ -101,6 +101,10 @@ Roteador próprio por hash (`src/app/router.ts`), sem dependência:
 | `#/demandas`, `#/demandas/<id>` | Caixa de demandas; o id abre o painel lateral da demanda |
 | `#/notas`, `#/notas/<id>` | Notas da equipe; o id abre o editor da nota |
 | `#/relatorio` | Relatório geral para a diretoria, sem shell (para imprimir) |
+| `#/relatorio/concluidos?periodo=…&em=…` | Relatório dos concluídos de um período, sem shell (para imprimir) |
+| `#/concluidos?periodo=trimestre&em=-1` | Concluídos, com o dashboard do período (`em` volta períodos: -1 é o anterior) |
+| `#/ti`, `#/ti/entregues` | Fila do TI (só para quem entrou como TI) |
+| `#/ti/processo/CX-001` | O processo visto pelo TI |
 | `#/processos?etapa=…&situacao=…` | Lista e quadro, com os filtros na URL |
 | `#/processos/CX-001` | Detalhe (aba Visão geral) |
 | `#/processos/CX-001/tarefas` | Detalhe, outras abas: `antes-e-depois`, `andamentos`, `anexos` |

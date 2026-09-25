@@ -40,7 +40,15 @@ Leia `docs/DESIGN_SYSTEM.md` inteiro. É a lei visual. Em especial:
 - A última etapa encerra o processo. Entrar nela marca a situação como concluída, e vice-versa.
 - Toda exclusão pede confirmação (`useConfirm`).
 - Item de lista em uso é arquivado, não apagado.
-- A mudança de etapa, situação, responsável, anexo e tarefa concluída gera andamento automático.
+- A mudança de etapa, situação, responsável, prazo, anexo e tarefa concluída gera andamento automático.
+  Mudar um prazo que já existia pede o motivo (opcional) e entra em `historicoPrazos`.
+- **TI:** quem entra como TI (`identidade.tipo === 'ti'`) só vê a Fila do TI (`#/ti`); o redirecionamento
+  está em `App.tsx`. O processo entra na fila ao chegar a uma etapa com sinal `ti`. O TI puxa, muda o
+  status dele (`desenvolvimento` ↔ `validar`), a previsão, o link e anexa a entrega (contexto `ti`),
+  mas **nunca** muda a etapa. Regras em `domain/ti.ts`.
+- **Concluídos:** períodos de calendário (semana, mês, trimestre, semestre, ano) em `domain/concluidos.ts`.
+- **Novidades** (sino do header): o que outras pessoas registraram desde a última visita
+  (`domain/novidades.ts`); a última visita é preferência do navegador.
 - Ao entrar numa etapa, as tarefas padrão dela entram no checklist (sem duplicar). Ao AVANÇAR com
   tarefas abertas da etapa atual, pedir confirmação (`features/processo/useMoverEtapa.ts`).
 - Um processo pode ter vários responsáveis (`responsaveisIds`). Sem pontuação em lugar nenhum.

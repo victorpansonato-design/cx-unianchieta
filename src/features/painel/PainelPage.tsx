@@ -15,6 +15,7 @@ import { ArchiveRestore, FolderKanban, Plus, Printer } from 'lucide-react';
 import { abrirNovoProcesso } from '../../app/novoProcesso';
 import { navegar, rotas } from '../../app/router';
 import { DiasNaEtapa, PrazoStatus } from '../../components/domain/StatusProcesso';
+import { LinhaTi } from '../../components/domain/StatusTi';
 import { Status } from '../../components/ui/Badges';
 import { AnimatedNumber } from '../../components/ui/Charts';
 import { Button, LinkButton } from '../../components/ui/Button';
@@ -151,7 +152,7 @@ export function PainelPage() {
           processos={r.comTi}
           vazio="Nenhum processo com o TI no momento."
           verTodos={rotas.processos({ rapido: 'ti' })}
-          detalhe={(p) => <DiasNaEtapa dias={diasNaEtapa(p)} curto />}
+          detalhe={(p) => <LinhaTi processo={p} config={s.config} className="justify-end" />}
         />
         <Card padded={false}>
           <CardHeader

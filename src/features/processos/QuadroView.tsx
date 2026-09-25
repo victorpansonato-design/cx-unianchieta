@@ -4,7 +4,8 @@
  * (ordenarPorPrioridade): Alta primeiro, depois Média, depois Baixa.
  *
  * O card mostra só o que decide o próximo passo — prioridade, título, etapa,
- * responsáveis, prazo e há quanto tempo está na etapa; o resto está a um
+ * quem do TI está com ele (quando está no TI), responsáveis, prazo e há
+ * quanto tempo está na etapa; o resto está a um
  * clique, no processo. O menu "Mover para…" de cada card muda a etapa com o
  * mesmo aviso de tarefas abertas do botão "Avançar". Quando a ordem muda, o
  * card desliza até o lugar novo em vez de pular.
@@ -14,10 +15,12 @@ import { MoreHorizontal } from 'lucide-react';
 import { navegar, rotas } from '../../app/router';
 import { DiasNaEtapa, PrazoStatus, PrioridadeStatus, SituacaoStatus } from '../../components/domain/StatusProcesso';
 import { PilhaDeAvatares } from '../../components/domain/Pessoas';
+import { LinhaTi } from '../../components/domain/StatusTi';
 import { Button } from '../../components/ui/Button';
 import { Menu } from '../../components/ui/Overlay';
 import type { Processo, Snapshot } from '../../data/types';
 import { diasNaEtapa, indiceEtapa, etapaDe, nomesResponsaveis } from '../../domain/processos';
+import { estaComTi } from '../../domain/ti';
 import { press, spring } from '../../lib/motion';
 import { useMoverEtapa } from '../processo/useMoverEtapa';
 
@@ -83,6 +86,7 @@ function CardProcesso({ processo, s, onMover }: { processo: Processo; s: Snapsho
           {etapa.nome}
         </p>
       )}
+      {estaComTi(s, processo) && <LinhaTi processo={processo} config={s.config} className="mt-1.5" />}
       <div className="mt-auto pt-4">
         <div className="flex items-end justify-between gap-3 border-t border-hairline pt-3">
           {nomes.length ? (
